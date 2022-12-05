@@ -22,7 +22,8 @@ set background=dark
 
 set termguicolors
 "设置颜色主题
-colorscheme ayu
+"colorscheme ayu move to init_plugin.vim 
+colorscheme nightfox
 
 set guifont=DroidSansMono_Nerd_Font:h10
 

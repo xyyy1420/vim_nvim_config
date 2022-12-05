@@ -11,8 +11,11 @@ if !exists('g:bundle_group')
     let g:bundle_group += [ 'header' ]
     let g:bundle_group += [ 'async' ]
     let g:bundle_group += [ 'ui' ]
-    let g:bundle_group += [ 'leaderf' ]
+"    let g:bundle_group += [ 'leaderf' ]
     let g:bundle_group += [ 'coc' ]
+    let g:bundle_group += [ 'treesitter' ]
+    let g:bundle_group+=['telescope']
+    let g:bundle_group+=['toggleterm']
 endif
 
 let s:home = fnamemodify(resolve(expand('<sfile>:p')),':h:h')
@@ -44,7 +47,8 @@ if index(g:bundle_group,'basic')>=0
     omap / <Plug>(easymotion-tn)
 
 
-    Plug 'justinmk/vim-syntax-extra'
+    "Plug 'justinmk/vim-syntax-extra' 很不幸 它失业了 因为我用了neovim 然后在
+    "treesitter的功能中替代了它
 
 
 endif
@@ -97,8 +101,13 @@ endif
 " vim主题插件 
 "----------------------------------------------------------------------
 if index(g:bundle_group,'color')>=0
-    Plug 'ayu-theme/ayu-vim'
-    let ayucolor="mirage"
+    if has('nvim')
+        "Plug 'folke/tokyonight.nvim',{'branch':'main'}
+        Plug 'EdenEast/nightfox.nvim'
+    else
+        Plug 'ayu-theme/ayu-vim'
+        let ayucolor="mirage"
+    endif
 endif
 
 "----------------------------------------------------------------------
@@ -144,15 +153,15 @@ if index(g:bundle_group,'format')>=0
     "文件实际还不存在，所以会出错，所以这里做了调整，但是这种情况下需要保存两
     "次才能实现格式化，还有待调整 TODO 修复二次保存才能格式化这个BUG
     function! Formatonsave()
-        if filereadable(".clang-format")
-            if filereadable(expand('%:p'))
-                let l:formatdiff = 1
-                py3f /usr/share/clang/clang-format.py
-            endif
+        if filereadable(expand('%:p'))
+            let l:formatdiff = 1
+            py3f /usr/share/clang/clang-format.py
         endif
     endfunc
 
-    autocmd BufWritePre *.h,*.c,*.cpp call Formatonsave()
+    if filereadable("./.clang-format")
+        autocmd BufWritePre *.h,*.c call Formatonsave()
+    endif
 endif
 
 
@@ -268,14 +277,14 @@ if index(g:bundle_group,'leaderf')>=0
     noremap <leader>fu :<C-U><C-R>=printf("Leaderf gtags --update")<CR><CR>
 
 " LeaderF - snippet
-"//    Plug 'skywind3000/LeaderF-snippet'
-"//    Plug 'Sirver/ultisnips'
-"//    Plug 'honza/vim-snippets'
-"//    let g:UltiSnipsExpandTrigger="<>"
-"//
-"//    let g:Lf_PreviewResult = get(g:, 'Lf_PreviewResult',{})
-"//    let g:Lf_PreviewResult.snippet = 1
-"//    noremap <leader>fs :<C-U><C-R>=printf("Leaderf snippet")<CR><CR>
+    Plug 'skywind3000/LeaderF-snippet'
+    Plug 'Sirver/ultisnips'
+    Plug 'honza/vim-snippets'
+    let g:UltiSnipsExpandTrigger="<>"
+
+    let g:Lf_PreviewResult = get(g:, 'Lf_PreviewResult',{})
+    let g:Lf_PreviewResult.snippet = 1
+    noremap <leader>fs :<C-U><C-R>=printf("Leaderf snippet")<CR><CR>
     " Leaderf man
     let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': 'DroidSansMono Nerd Font Mono' }
 endif
@@ -301,4 +310,48 @@ if index(g:bundle_group,'coc')>=0
 
 endif
 
+
+
+if has('nvim')
+    if index(g:bundle_group,'treesitter')>=0
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    endif
+    if index(g:bundle_group,'telescope')>=0
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'nvim-telescope/telescope.nvim',{'tag':'0.1.x'}
+        Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+        Plug 'fannheyward/telescope-coc.nvim'
+
+        nnoremap <leader>ff <cmd>Telescope find_files<cr>
+        nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+        nnoremap <leader>fb <cmd>Telescope buffers<cr>
+        nnoremap <leader>fn <cmd>Telescope help_tags<cr>
+
+    endif
+
+    if index(g:bundle_group,"toggleterm")>=0 
+        Plug 'akinsho/toggleterm.nvim'
+    endif
+
+endif
+
 call plug#end()
+
+
+
+if has('nvim')
+    if index(g:bundle_group,'treesitter')>=0
+        source ~/jxy_vim/init/treesitter.lua
+    endif
+    if index(g:bundle_group,'color')>=0
+        source ~/jxy_vim/init/nightfox.lua
+    endif
+    if index(g:bundle_group,'telescope')>=0 
+        source ~/jxy_vim/init/telescope.lua
+    endif
+
+    if index(g:bundle_group,'telescope')>=0 
+        source ~/jxy_vim/init/toggleterm.lua
+    endif
+endif
+
