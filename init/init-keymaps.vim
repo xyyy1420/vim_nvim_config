@@ -1,28 +1,28 @@
 "----------------------------------------------------------------------
 " 终端下功能键修正
 "----------------------------------------------------------------------
-function! s:key_escape(name,code)
-    if has('nvim') == 0 && has('gui_running') == 0
-        exec "set ".a:name."=\e".a:code
-    endif
-endfunc
-
-call s:key_escape('<F1>', 'OP')
-call s:key_escape('<F2>', 'OQ')
-call s:key_escape('<F3>', 'OR')
-call s:key_escape('<F4>', 'OS')
-call s:key_escape('<S-F1>', '[1;2P')
-call s:key_escape('<S-F2>', '[1;2Q')
-call s:key_escape('<S-F3>', '[1;2R')
-call s:key_escape('<S-F4>', '[1;2S')
-call s:key_escape('<S-F5>', '[15;2~')
-call s:key_escape('<S-F6>', '[17;2~')
-call s:key_escape('<S-F7>', '[18;2~')
-call s:key_escape('<S-F8>', '[19;2~')
-call s:key_escape('<S-F9>', '[20;2~')
-call s:key_escape('<S-F10>', '[21;2~')
-call s:key_escape('<S-F11>', '[23;2~')
-call s:key_escape('<S-F12>', '[24;2~')
+"function! s:key_escape(name,code)
+"    if has('nvim') == 0 && has('gui_running') == 0
+"        exec "set ".a:name."=\e".a:code
+"    endif
+"endfunc
+"
+"call s:key_escape('<F1>', 'OP')
+"call s:key_escape('<F2>', 'OQ')
+"call s:key_escape('<F3>', 'OR')
+"call s:key_escape('<F4>', 'OS')
+"call s:key_escape('<S-F1>', '[1;2P')
+"call s:key_escape('<S-F2>', '[1;2Q')
+"call s:key_escape('<S-F3>', '[1;2R')
+"call s:key_escape('<S-F4>', '[1;2S')
+"call s:key_escape('<S-F5>', '[15;2~')
+"call s:key_escape('<S-F6>', '[17;2~')
+"call s:key_escape('<S-F7>', '[18;2~')
+"call s:key_escape('<S-F8>', '[19;2~')
+"call s:key_escape('<S-F9>', '[20;2~')
+"call s:key_escape('<S-F10>', '[21;2~')
+"call s:key_escape('<S-F11>', '[23;2~')
+"call s:key_escape('<S-F12>', '[24;2~')
 
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
@@ -156,3 +156,16 @@ nmap <leader>p :r /tmp/vitmp<CR>
 "noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
 "noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
 "noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
+
+"使用Ctrl j/k来快速跳转上次或者下次修改的地方
+nmap <C-j> <C-i>
+nmap <C-k> <C-o>
+
+
+"每次搜索跳转的时候都将光标处放置在窗口中央
+noremap n nzz
+noremap N Nzz
+
+"使用Ctrl w +/-的组合键位，来实现上下分屏时的大小
+noremap <c-w>+ :res +5<CR>
+noremap <c-w>- :res -5<CR>

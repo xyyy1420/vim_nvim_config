@@ -14,10 +14,10 @@ exec 'set rtp+='.s:home
 
 set rtp+=~/.vim
 
-LoadScript init/init-basic.vim
 LoadScript init/init-plugins.vim
+LoadScript init/init-basic.vim
 "LoadScript init/init-config.vim
-LoadScript init/init-style.vim
+"LoadScript init/init-style.vim
 LoadScript init/init-keymaps.vim
 
 

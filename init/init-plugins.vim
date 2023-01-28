@@ -5,17 +5,33 @@
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
     let g:bundle_group = ['basic' ]
-    let g:bundle_group += [ 'format' ]
-    let g:bundle_group += [ 'search' ]
+"    let g:bundle_group += [ 'format' ]
     let g:bundle_group += [ 'color' ]
     let g:bundle_group += [ 'header' ]
-    let g:bundle_group += [ 'async' ]
-    let g:bundle_group += [ 'ui' ]
+
 "    let g:bundle_group += [ 'leaderf' ]
+    let g:bundle_group += [ 'g_format' ]
+
     let g:bundle_group += [ 'coc' ]
-    let g:bundle_group += [ 'treesitter' ]
-    let g:bundle_group+=['telescope']
-    let g:bundle_group+=['toggleterm']
+    let g:bundle_group += [ 'pandoc' ]
+    let g:bundle_group += [ 'fzf' ]
+
+    if has('nvim')
+        let g:bundle_group += [ 'treesitter' ]
+        let g:bundle_group += [ 'telescope' ]
+        let g:bundle_group += [ 'toggletasks' ]
+        let g:bundle_group += [ 'toggleterm' ]
+        let g:bundle_group += [ 'harpoon' ]
+        let g:bundle_group += [ 'fcitx' ]
+        let g:bundle_group += [ 'nvim_ufo_fold' ]
+    endif
+
+    if has ('vim')
+        let g:bundle_group += [ 'ui' ]
+        let g:bundle_group += [ 'tags' ]
+        let g:bundle_group += [ 'async' ]
+    endif
+
 endif
 
 let s:home = fnamemodify(resolve(expand('<sfile>:p')),':h:h')
@@ -40,27 +56,53 @@ if index(g:bundle_group,'basic')>=0
 
     let g:EasyMotion_smartcase=1
 
+    map <leader>l <Plug>(easymotion-lineforward)
     map <leader>j <Plug>(easymotion-j)
     map <leader>k <Plug>(easymotion-k)
+    map <leader>h <Plug>(easymotion-linebackward)
+    map <leader>w <Plug>(easymotion-w)
+    map <leader>b <Plug>(easymotion-b)
+    let g:EasyMotion_startofline=0
+    let g:EasyMotion_smartcase=1
 
-    map / <Plug>(easymotion-sn)
-    omap / <Plug>(easymotion-tn)
+"    map / <Plug>(easymotion-sn)
+"    omap / <Plug>(easymotion-tn)
 
-
-    "Plug 'justinmk/vim-syntax-extra' 很不幸 它失业了 因为我用了neovim 然后在
+"    Plug 'justinmk/vim-syntax-extra'
+    "很不幸 它失业了 因为我用了neovim 然后在
     "treesitter的功能中替代了它
-
 
 endif
 
 "----------------------------------------------------------------------
 " 搜索插件 
 "----------------------------------------------------------------------
-if index(g:bundle_group,'search')>=0
+if index(g:bundle_group,'fzf')>=0
     Plug 'junegunn/fzf',{'do':{ -> fzf#install() }}
     Plug 'junegunn/fzf.vim'
+    Plug 'yuki-yano/fzf-preview.vim',{'branch':'release/rpc'}
 
     let g:fzf_preview_window = ['right,50%','ctrl-/']
+    " Files
+    " GFiles
+    " GFiles?
+    " Buffers
+    " Colors
+    " Ag
+    " Rg
+    " Lines
+    " BLines
+    " Tags
+    " BTags
+    " Marks
+    " Windows
+    " Locate
+    " History
+    " History:
+    " History/
+    " Snippets
+    " Commits
+    "
 
 
 endif
@@ -104,6 +146,7 @@ if index(g:bundle_group,'color')>=0
     if has('nvim')
         "Plug 'folke/tokyonight.nvim',{'branch':'main'}
         Plug 'EdenEast/nightfox.nvim'
+        Plug 'nyoom-engineering/oxocarbon.nvim'
     else
         Plug 'ayu-theme/ayu-vim'
         let ayucolor="mirage"
@@ -152,6 +195,8 @@ if index(g:bundle_group,'format')>=0
     "因为是在从缓冲区写入文件之前执行函数，所以如果该文件第一次在vim中创建，该
     "文件实际还不存在，所以会出错，所以这里做了调整，但是这种情况下需要保存两
     "次才能实现格式化，还有待调整 TODO 修复二次保存才能格式化这个BUG
+    "如果能通用几份clang-format配置来格式化所有的文件就好了
+
     function! Formatonsave()
         if filereadable(expand('%:p'))
             let l:formatdiff = 1
@@ -164,8 +209,6 @@ if index(g:bundle_group,'format')>=0
     endif
 endif
 
-
-
 "----------------------------------------------------------------------
 " tag插件 
 "----------------------------------------------------------------------
@@ -173,28 +216,28 @@ if index(g:bundle_group,'tags')>=0
     Plug 'skywind3000/vim-gutentags'
     Plug 'skywind3000/gutentags_plus'
 
-    let $GTAGSLABEL = 'native-pygments'
-    let $GTAGSCONF = '/usr/share/gtags/gtags.conf'
+"    let $GTAGSLABEL = 'native-pygments'
+"    let $GTAGSCONF = '/usr/share/gtags/gtags.conf'
 
-    let g:gutentags_project_root = ['.root']
+    let g:gutentags_project_root = ['.root','.git']
     let g:gutentags_ctags_tagfile = '.tags'
 
     let g:gutentags_cache_dir = expand('~/.cache/tags')
 
     let g:gutentags_modules=[]
-
+"
     if executable('ctags')
         let g:gutentags_modules += ['ctags']
     endif
-
+"
     if executable('gtags') && executable('gtags-cscope')
         let g:gutentags_modules += ['gtags_cscope']
     endif
 
-    let g:gutentags_ctags_extra_args=[]
-    let g:gutentags_ctags_extra_args=['--fields=+niazS','--extra=+q']
-    let g:gutentags_ctags_extra_args+=['--c++-kinds=+px']
-    let g:gutentags_ctags_extra_args+=['--c-kinds=+px']
+"    let g:gutentags_ctags_extra_args=['--gtagslabel=pygments']
+"    let g:gutentags_ctags_extra_args+=['--fields=+niazS','--extra=+q']
+"    let g:gutentags_ctags_extra_args+=['--c++-kinds=+px']
+"    let g:gutentags_ctags_extra_args+=['--c-kinds=+px']
 
     let g:gutentags_auto_add_gtags_cscope=0
     "禁用默认键盘映射
@@ -222,6 +265,8 @@ if index(g:bundle_group,'tags')>=0
     noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
     "let g:gutentags_define_advanced_commands = 1
     let g:gutentags_define_advanced_commands = 1
+
+    " fine this gtags plugin die 
     
 endif
 
@@ -234,8 +279,9 @@ if index(g:bundle_group,'async')>=0
     let g:asyncrun_open = 8
 endif
 
+
 "----------------------------------------------------------------------
-" 模糊搜索LeaderF 
+" 模糊搜索LeaderF "已经不用了
 "----------------------------------------------------------------------
 if index(g:bundle_group,'leaderf')>=0
     Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
@@ -244,7 +290,6 @@ if index(g:bundle_group,'leaderf')>=0
 "    let g:Lf_ShowDevIcons = 1
 "    let g:Lf_DevIconsFont = "DroidSansMono Nerd Font Mono"
 
-    set ambiwidth=double
 
     " 窗口显示方式为弹出，支持预览
     let g:Lf_WindowPosition = 'popup'
@@ -294,30 +339,91 @@ endif
 " COC补全
 "----------------------------------------------------------------------
 if index(g:bundle_group,'coc')>=0
+
     Plug 'neoclide/coc.nvim',{'branch':'release'}
     set updatetime=300
     set signcolumn=yes
 
-    inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-    inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-    inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-    inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
+    inoremap <silent><expr> <TAB>
+          \ coc#pum#visible() ? coc#pum#next(1) :
+          \ CheckBackspace() ? "\<Tab>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
+    " Make <CR> to accept selected completion item or notify coc.nvim to format
+    " <C-g>u breaks current undo, please make your own choice.
+    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+    function! CheckBackspace() abort
+        let col=col('.') - 1
+        return !col || getline('.')[col-1] =~# '\s'
+    endfunction
+
+"    inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+"    inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+"    inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+"    inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
     let g:coc_snippet_next = '<C-j>'
     let g:coc_snippet_prev = '<C-k>'
+
+    nmap <silent> [g <Plug>(coc-diagnosis-prev)
+    nmap <silent> ]g <Plug>(coc-diagnosis-next)
+
+    if has('nvim')
+        inoremap <silent><expr> <c-space> coc#refresh()
+    else
+        inoremap <silent><expr> <c-@> coc#refresh()
+    endif
+
+"	 使用telescope-coc插件替代了这部分功能
+"    nmap <silent> <leader>gd <Plug>(coc-definition)
+"    nmap <silent> <leader>gy <Plug>(coc-type-definition)
+"    nmap <silent> <leader>gi <Plug>(coc-implementation)
+"    nmap <silent> <leader>gr <Plug>(coc-reference)
+
+    function! ShowDocumentation()
+        if CocAction('hasProvider','hover')
+            call CocActionAsync('doHover')
+        else
+            call feedkeys('K','in')
+        endif
+    endfunction
+    nnoremap <silent> K :call ShowDocumentation()<CR>
+
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+    
     "autocmd FileType json syntax match Comment +\/\/.\+$+
 
+    if has('nvim-0.4.0') || has('patch-8.2.0750')
+        nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+        nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+        inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+        inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+        vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+        vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    endif
+
+endif
+
+if index(g:bundle_group,'pandoc')>=0
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'vim-pandoc/vim-pandoc-syntax'
+    let g:pandoc#modules#disabled=['spell']
 endif
 
 
 
 if has('nvim')
+
     if index(g:bundle_group,'treesitter')>=0
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     endif
+
     if index(g:bundle_group,'telescope')>=0
         Plug 'nvim-lua/plenary.nvim'
+        Plug 'nvim-lua/popup.nvim'
         Plug 'nvim-telescope/telescope.nvim',{'tag':'0.1.x'}
         Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
         Plug 'fannheyward/telescope-coc.nvim'
@@ -325,7 +431,7 @@ if has('nvim')
         nnoremap <leader>ff <cmd>Telescope find_files<cr>
         nnoremap <leader>fg <cmd>Telescope live_grep<cr>
         nnoremap <leader>fb <cmd>Telescope buffers<cr>
-        nnoremap <leader>fn <cmd>Telescope help_tags<cr>
+        nnoremap <leader>ft <cmd>Telescope help_tags<cr>
 
     endif
 
@@ -333,25 +439,75 @@ if has('nvim')
         Plug 'akinsho/toggleterm.nvim'
     endif
 
+    Plug 'jedrzejboczar/toggletasks.nvim'
+    Plug 'da-moon/telescope-toggleterm.nvim'
+    "Telescope toggleterm << command open buffers with toggleterm which opened before
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+    let g:mkdp_auto_start=0
+
+    let g:mkdp_auto_close=1
+
+    let g:mkdp_refresh_slow=0
+
+    let g:mkdp_open_to_the_world=0
+
+    nmap <silent> <leader>gm :Telescope coc mru<CR>
+    nmap <silent> <leader>gl :Telescope coc locations<CR>
+    nmap <silent> <leader>gr :Telescope coc references<CR>
+    nmap <silent> <leader>gd :Telescope coc definitions<CR>
+"    nmap <silent> <leader>gd :Telescope coc declarations<CR>
+    nmap <silent> <leader>gi :Telescope coc implementations<CR>
+    nmap <silent> <leader>gt :Telescope coc type_definitions<CR>
+
+    if index(g:bundle_group,'harpoon')>=0
+        Plug 'ThePrimeagen/harpoon'
+        nmap <silent> <leader>ga :lua require("harpoon.mark").add_file()<CR>
+        nmap <silent> <leader>gm :lua require("harpoon.ui").toggle_quick_menu()<CR>
+        nmap <silent> <leader>nn :lua require("harpoon.ui").nav_next()<CR>
+        nmap <silent> <leader>np :lua require("harpoon.ui").nav_prev()<CR>
+    endif
+
+    if index(g:bundle_group,'nvim_ufo_fold')>=0
+        Plug 'kevinhwang91/promise-async'
+        Plug 'kevinhwang91/nvim-ufo'
+    endif
+
+    "自动中英文切换
+    if index(g:bundle_group,'fcitx')>=0
+        Plug 'h-hg/fcitx.nvim'
+    endif
+
 endif
 
+
 call plug#end()
-
-
 
 if has('nvim')
     if index(g:bundle_group,'treesitter')>=0
         source ~/jxy_vim/init/treesitter.lua
     endif
+
     if index(g:bundle_group,'color')>=0
         source ~/jxy_vim/init/nightfox.lua
     endif
+
     if index(g:bundle_group,'telescope')>=0 
         source ~/jxy_vim/init/telescope.lua
     endif
 
-    if index(g:bundle_group,'telescope')>=0 
+    if index(g:bundle_group,'toggleterm')>=0 
         source ~/jxy_vim/init/toggleterm.lua
     endif
+
+    if index(g:bundle_group,'toggletasks')>=0
+        source ~/jxy_vim/init/toggletasks.lua
+    endif
+
+    if index(g:bundle_group,'nvim_ufo_fold')>=0
+        source ~/jxy_vim/init/nvim-ufo.lua
+    endif
+
+    source ~/jxy_vim/init/telescope_mappings.lua
+
 endif
 
