@@ -9,7 +9,6 @@ if !exists('g:bundle_group')
     let g:bundle_group += [ 'color' ]
     let g:bundle_group += [ 'header' ]
 
-"    let g:bundle_group += [ 'leaderf' ]
     let g:bundle_group += [ 'g_format' ]
 
     let g:bundle_group += [ 'coc' ]
@@ -49,6 +48,7 @@ call plug#begin(get(g:,'bundle_home','~/.vim/plugged'))
 "----------------------------------------------------------------------
 if index(g:bundle_group,'basic')>=0
     Plug 'ryanoasis/vim-devicons'
+
     Plug 'easymotion/vim-easymotion'
     let g:EasyMotion_do_mapping=0
     nmap s <Plug>(easymotion-overwin-f)
@@ -65,12 +65,11 @@ if index(g:bundle_group,'basic')>=0
     let g:EasyMotion_startofline=0
     let g:EasyMotion_smartcase=1
 
+
+    " 注释
+    Plug 'numToStr/Comment.nvim'
 "    map / <Plug>(easymotion-sn)
 "    omap / <Plug>(easymotion-tn)
-
-"    Plug 'justinmk/vim-syntax-extra'
-    "很不幸 它失业了 因为我用了neovim 然后在
-    "treesitter的功能中替代了它
 
 endif
 
@@ -83,6 +82,7 @@ if index(g:bundle_group,'fzf')>=0
     Plug 'yuki-yano/fzf-preview.vim',{'branch':'release/rpc'}
 
     let g:fzf_preview_window = ['right,50%','ctrl-/']
+    " Commands : -------------------------
     " Files
     " GFiles
     " GFiles?
@@ -102,7 +102,7 @@ if index(g:bundle_group,'fzf')>=0
     " History/
     " Snippets
     " Commits
-    "
+    " ------------------------------------
 
 
 endif
@@ -281,61 +281,6 @@ endif
 
 
 "----------------------------------------------------------------------
-" 模糊搜索LeaderF "已经不用了
-"----------------------------------------------------------------------
-if index(g:bundle_group,'leaderf')>=0
-    Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-
-    " 字体和图标显示
-"    let g:Lf_ShowDevIcons = 1
-"    let g:Lf_DevIconsFont = "DroidSansMono Nerd Font Mono"
-
-
-    " 窗口显示方式为弹出，支持预览
-    let g:Lf_WindowPosition = 'popup'
-    let g:Lf_PreviewInPopup =1
-
-    let g:Lf_ShortcutF = "<leader>ff"
-    " 不需要search buffer，因为已经使用quickui来搜索buffer了
-    "noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s","")<CR><CR>
-    noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-    noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-    "noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-    noremap <leader>fr <esc>:Rg<CR>
-
-    noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
-    noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
-" Leaderf virsual mode search visually selected text literally
-    xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
-    noremap go :<C-U>Leaderf! rg --recall<CR><CR>
-
-" LeaderF - Gtags
-    let g:Lf_GtagsAutoGenerate = 1
-    let g:Lf_Gtagslabel = 'native-pygments'
-    let g:Lf_RootMarkers = ['.git','.hg','.svn','.proj']
-    noremap <leader>jr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-    noremap <leader>jd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-    noremap <leader>jo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
-    noremap <leader>jn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
-    noremap <leader>jp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
-    noremap <leader>fg :<C-U><C-R>=printf("Leaderf gtags --all")<CR><CR>
-    noremap <leader>fu :<C-U><C-R>=printf("Leaderf gtags --update")<CR><CR>
-
-" LeaderF - snippet
-    Plug 'skywind3000/LeaderF-snippet'
-    Plug 'Sirver/ultisnips'
-    Plug 'honza/vim-snippets'
-    let g:UltiSnipsExpandTrigger="<>"
-
-    let g:Lf_PreviewResult = get(g:, 'Lf_PreviewResult',{})
-    let g:Lf_PreviewResult.snippet = 1
-    noremap <leader>fs :<C-U><C-R>=printf("Leaderf snippet")<CR><CR>
-    " Leaderf man
-    let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': 'DroidSansMono Nerd Font Mono' }
-endif
-
-
-"----------------------------------------------------------------------
 " COC补全
 "----------------------------------------------------------------------
 if index(g:bundle_group,'coc')>=0
@@ -427,11 +372,13 @@ if has('nvim')
         Plug 'nvim-telescope/telescope.nvim',{'tag':'0.1.x'}
         Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
         Plug 'fannheyward/telescope-coc.nvim'
+        Plug 'jvgrootveld/telescope-zoxide'
 
         nnoremap <leader>ff <cmd>Telescope find_files<cr>
         nnoremap <leader>fg <cmd>Telescope live_grep<cr>
         nnoremap <leader>fb <cmd>Telescope buffers<cr>
         nnoremap <leader>ft <cmd>Telescope help_tags<cr>
+        nnoremap <leader>fz <cmd>Telescope zoxide list<cr>
 
     endif
 
@@ -482,32 +429,33 @@ endif
 
 call plug#end()
 
-if has('nvim')
-    if index(g:bundle_group,'treesitter')>=0
-        source ~/jxy_vim/init/treesitter.lua
-    endif
+ if has('nvim')
+     if index(g:bundle_group,'treesitter')>=0
+         source ~/jxy_vim/init/treesitter.lua
+     endif
 
-    if index(g:bundle_group,'color')>=0
-        source ~/jxy_vim/init/nightfox.lua
-    endif
+     if index(g:bundle_group,'color')>=0
+         source ~/jxy_vim/init/nightfox.lua
+     endif
 
-    if index(g:bundle_group,'telescope')>=0 
-        source ~/jxy_vim/init/telescope.lua
-    endif
+     if index(g:bundle_group,'telescope')>=0 
+         source ~/jxy_vim/init/telescope.lua
+     endif
 
-    if index(g:bundle_group,'toggleterm')>=0 
-        source ~/jxy_vim/init/toggleterm.lua
-    endif
+     if index(g:bundle_group,'toggleterm')>=0 
+         source ~/jxy_vim/init/toggleterm.lua
+     endif
 
-    if index(g:bundle_group,'toggletasks')>=0
-        source ~/jxy_vim/init/toggletasks.lua
-    endif
+     if index(g:bundle_group,'toggletasks')>=0
+         source ~/jxy_vim/init/toggletasks.lua
+     endif
 
-    if index(g:bundle_group,'nvim_ufo_fold')>=0
-        source ~/jxy_vim/init/nvim-ufo.lua
-    endif
+     if index(g:bundle_group,'nvim_ufo_fold')>=0
+         source ~/jxy_vim/init/nvim-ufo.lua
+     endif
 
-    source ~/jxy_vim/init/telescope_mappings.lua
+     source ~/jxy_vim/init/telescope_mappings.lua
+     source ~/jxy_vim/init/comment.lua
 
-endif
+ endif
 

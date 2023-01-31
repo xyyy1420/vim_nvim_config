@@ -9,7 +9,7 @@ require('telescope').setup{
                 -- e.g. git_{create, delete, ...}_branch for the git_branches picker
                 ["<C-j>"]=require('telescope.actions').cycle_history_next,
                 ["<C-k>"]=require('telescope.actions').cycle_history_prev,
-                ["<C-]>"]=require('telescope.actions').file_vsplit,
+                ["<C-v>"]=require('telescope.actions').file_vsplit,
                 ["<C-t>"]=require('telescope.actions').file_tab,
 
             },
@@ -50,3 +50,4 @@ require('telescope').load_extension('coc')
 require('telescope').load_extension('toggleterm')
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('harpoon')
+require('telescope').load_extension('zoxide')

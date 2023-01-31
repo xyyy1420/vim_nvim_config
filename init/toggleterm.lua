@@ -1,6 +1,6 @@
 require('toggleterm').setup{
     open_mapping=[[<C-\>]],
-    autochdir=true,
+    autochdir=false,
     direction='float',
     shell="fish",
     auto_scroll=true,
