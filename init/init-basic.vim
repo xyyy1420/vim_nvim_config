@@ -51,7 +51,8 @@ set background=dark
 set termguicolors
 "设置颜色主题
 "colorscheme ayu move to init_plugin.vim 
-colorscheme nightfox
+"colorscheme nightfox
+colorscheme nightfly 
 "colorscheme oxocarbon
 "colorscheme tokyonight-night 
 
