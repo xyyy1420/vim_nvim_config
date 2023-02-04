@@ -1,1 +1,1 @@
-let g:coq_settings={'auto_start':v:true,'display.icons.mode':'none'}
+let g:coq_settings={'auto_start':'shut-up','display.icons.mode':'none'}
