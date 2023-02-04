@@ -11,7 +11,7 @@ if !exists('g:bundle_group')
     let g:bundle_group += [ 'g_format' ]
 "    let g:bundle_group += [ 'format' ]
 
-    let g:bundle_group += [ 'coc' ]
+"    let g:bundle_group += [ 'coc' ]
     let g:bundle_group += [ 'pandoc' ]
     let g:bundle_group += [ 'fzf' ]
 
@@ -24,6 +24,7 @@ if !exists('g:bundle_group')
         let g:bundle_group += [ 'harpoon' ]
         let g:bundle_group += [ 'fcitx' ]
         let g:bundle_group += [ 'nvim_ufo_fold' ]
+        let g:bundle_group += [ 'todo-comments' ]
 "        let g:bundle_group += [ 'task' ]
 "        let g:bundle_group += [ 'neoformat' ]
     endif
@@ -408,14 +409,14 @@ if has('nvim')
         nnoremap <leader>fz <cmd>Telescope zoxide list<cr>
 
         "与coc联动的插件，主要用于代码导航
-        Plug 'fannheyward/telescope-coc.nvim'
-        nmap <silent> <leader>gm :Telescope coc mru<CR>
-        nmap <silent> <leader>gl :Telescope coc locations<CR>
-        nmap <silent> <leader>gr :Telescope coc references<CR>
-        nmap <silent> <leader>gd :Telescope coc definitions<CR>
-    "    nmap <silent> <leader>gd :Telescope coc declarations<CR>
-        nmap <silent> <leader>gi :Telescope coc implementations<CR>
-        nmap <silent> <leader>gt :Telescope coc type_definitions<CR>
+       " Plug 'fannheyward/telescope-coc.nvim'
+       " nmap <silent> <leader>gm :Telescope coc mru<CR>
+       " nmap <silent> <leader>gl :Telescope coc locations<CR>
+       " nmap <silent> <leader>gr :Telescope coc references<CR>
+       " nmap <silent> <leader>gd :Telescope coc definitions<CR>
+    "  "  nmap <silent> <leader>gd :Telescope coc declarations<CR>
+       " nmap <silent> <leader>gi :Telescope coc implementations<CR>
+       " nmap <silent> <leader>gt :Telescope coc type_definitions<CR>
 
         "与zoxide联动的插件，主要提供对zoxide数据库搜索功能 快捷键leader fz
         Plug 'jvgrootveld/telescope-zoxide'
@@ -467,7 +468,23 @@ if has('nvim')
         Plug 'h-hg/fcitx.nvim'
     endif
 
-    Plug 'Wansmer/treesj'
+    
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+    Plug 'ray-x/navigator.lua'
+    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
+
+    Plug 'ms-jpq/coq_nvim',{'branch':'coq'}
+    Plug 'ms-jpq/coq.artifacts',{'branch':'artifacts'}
+    Plug 'ms-jpq/coq.thirdparty',{'branch':'3p'}
+
+    "配置中
+    Plug 'jose-elias-alvarez/null-ls.nvim'
+    
+
+    "Plug 'Wansmer/treesj'
     "TODO 代码导航即将到来
     "Plug 'neovim/nvim-lspconfig'
     "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
@@ -478,7 +495,7 @@ endif
 
 call plug#end()
 
- if has('nvim')
+if has('nvim')
      if index(g:bundle_group,'treesitter')>=0
          source ~/jxy_vim/init/treesitter.lua
      endif
@@ -506,7 +523,16 @@ call plug#end()
     " source ~/jxy_vim/init/telescope_mappings.lua
      source ~/jxy_vim/init/comment.lua
      " 配置编辑中，还没完成
-     source ~/jxy_vim/init/treesj.lua
+"     source ~/jxy_vim/init/treesj.lua
 
- endif
+    source ~/jxy_vim/nvim_navigator.lua
+
+    source ~/jxy_vim/nvim_mason.lua
+
+    source ~/jxy_vim/nvim_coq.vim
+
+    source ~/jxy_vim/nvim_null_ls.lua
+
+    set completeopt=menu,menuone,noselect
+endif
 

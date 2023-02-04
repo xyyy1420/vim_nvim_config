@@ -19,6 +19,7 @@ LoadScript init/init-basic.vim
 "LoadScript init/init-config.vim
 "LoadScript init/init-style.vim
 LoadScript init/init-keymaps.vim
+"LoadScript ./vim_test_plugin.vim
 
 
 
