@@ -29,6 +29,10 @@ vim.g.coq_settings={
                 Variable = "𝑣",
             },
         },
+    },
+    keymap={
+        pre_select=false,
+        jump_to_mark="<c-j>"
     }
 }
 require("coq")
