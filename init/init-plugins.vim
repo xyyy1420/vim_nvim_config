@@ -11,7 +11,7 @@ if !exists('g:bundle_group')
     let g:bundle_group += [ 'g_format' ]
 "    let g:bundle_group += [ 'format' ]
 
-    let g:bundle_group += [ 'coc' ]
+    "let g:bundle_group += [ 'coc' ]
     let g:bundle_group += [ 'pandoc' ]
     let g:bundle_group += [ 'fzf' ]
 
@@ -30,8 +30,8 @@ if !exists('g:bundle_group')
 
 "    let g:bundle_group+=['comment']
 "    let g:bundle_group+=['navigator']
-"    let g:bundle_group+=['mason']
-"    let g:bundle_group+=['coq']
+    let g:bundle_group+=['mason']
+    let g:bundle_group+=['coq']
 "    let g:bundle_group+=['null-ls']
 "    let g:bundle_group+=['trouble']
 
