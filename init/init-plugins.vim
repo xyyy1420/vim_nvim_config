@@ -29,7 +29,7 @@ if !exists('g:bundle_group')
     endif
 
 "    let g:bundle_group+=['comment']
-"    let g:bundle_group+=['navigator']
+    let g:bundle_group+=['navigator']
     let g:bundle_group+=['mason']
     let g:bundle_group+=['coq']
 "    let g:bundle_group+=['null-ls']
@@ -475,8 +475,8 @@ if has('nvim')
 
     if index(g:bundle_group,'navigator')>=0
         Plug 'neovim/nvim-lspconfig'
-        "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-        "Plug 'ray-x/navigator.lua'
+        Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+        Plug 'ray-x/navigator.lua'
     endif
    
     if index(g:bundle_group,'mason')>=0
@@ -543,19 +543,15 @@ if has('nvim')
     "     source ~/jxy_vim/init/treesj.lua
 
     if index(g:bundle_group,'navigator')>=0
-        "source ~/jxy_vim/nvim_navigator.lua
+        source ~/jxy_vim/init/nvim_plug_config/nvim_navigator.lua
     endif
 
     if index(g:bundle_group,'mason')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_mason.lua
-        
     endif
 
     if index(g:bundle_group,'coq')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_coq_settings.lua
-        
-        
-"        source ~/jxy_vim/init/nvim_plug_config/nvim_coq.lua
     endif
 
     if index(g:bundle_group,'null-ls')>=0
