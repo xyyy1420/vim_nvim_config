@@ -11,7 +11,7 @@ if !exists('g:bundle_group')
     let g:bundle_group += [ 'g_format' ]
 "    let g:bundle_group += [ 'format' ]
 
-"    let g:bundle_group += [ 'coc' ]
+    let g:bundle_group += [ 'coc' ]
     let g:bundle_group += [ 'pandoc' ]
     let g:bundle_group += [ 'fzf' ]
 
@@ -26,8 +26,14 @@ if !exists('g:bundle_group')
         let g:bundle_group += [ 'nvim_ufo_fold' ]
         let g:bundle_group += [ 'todo-comments' ]
 "        let g:bundle_group += [ 'task' ]
-"        let g:bundle_group += [ 'neoformat' ]
     endif
+
+"    let g:bundle_group+=['comment']
+"    let g:bundle_group+=['navigator']
+"    let g:bundle_group+=['mason']
+"    let g:bundle_group+=['coq']
+"    let g:bundle_group+=['null-ls']
+"    let g:bundle_group+=['trouble']
 
     if has ('vim')
         let g:bundle_group += [ 'ui' ]
@@ -409,14 +415,16 @@ if has('nvim')
         nnoremap <leader>fz <cmd>Telescope zoxide list<cr>
 
         "与coc联动的插件，主要用于代码导航
-       " Plug 'fannheyward/telescope-coc.nvim'
-       " nmap <silent> <leader>gm :Telescope coc mru<CR>
-       " nmap <silent> <leader>gl :Telescope coc locations<CR>
-       " nmap <silent> <leader>gr :Telescope coc references<CR>
-       " nmap <silent> <leader>gd :Telescope coc definitions<CR>
-    "  "  nmap <silent> <leader>gd :Telescope coc declarations<CR>
-       " nmap <silent> <leader>gi :Telescope coc implementations<CR>
-       " nmap <silent> <leader>gt :Telescope coc type_definitions<CR>
+        if index(g:bundle_group,'coc')>=0
+            Plug 'fannheyward/telescope-coc.nvim'
+            nmap <silent> <leader>gm :Telescope coc mru<CR>
+            nmap <silent> <leader>gl :Telescope coc locations<CR>
+            nmap <silent> <leader>gr :Telescope coc references<CR>
+            nmap <silent> <leader>gd :Telescope coc definitions<CR>
+        "    nmap <silent> <leader>gd :Telescope coc declarations<CR>
+            nmap <silent> <leader>gi :Telescope coc implementations<CR>
+            nmap <silent> <leader>gt :Telescope coc type_definitions<CR>
+        endif
 
         "与zoxide联动的插件，主要提供对zoxide数据库搜索功能 快捷键leader fz
         Plug 'jvgrootveld/telescope-zoxide'
@@ -440,11 +448,8 @@ if has('nvim')
     if index(g:bundle_group,'markdown_preview')>=0
         Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
         let g:mkdp_auto_start=0
-
         let g:mkdp_auto_close=1
-
         let g:mkdp_refresh_slow=0
-
         let g:mkdp_open_to_the_world=0
     endif
 
@@ -468,29 +473,36 @@ if has('nvim')
         Plug 'h-hg/fcitx.nvim'
     endif
 
-    
-    "Plug 'neovim/nvim-lspconfig'
-    "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-    "Plug 'ray-x/navigator.lua'
-    Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
+     if index(g:bundle_group,'navigator')>=0
+        "Plug 'neovim/nvim-lspconfig'
+        "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+        "Plug 'ray-x/navigator.lua'
+    endif
+   
+    if index(g:bundle_group,'mason')>=0
+        Plug 'williamboman/mason.nvim'
+        Plug 'williamboman/mason-lspconfig.nvim'
+    endif
 
-    Plug 'ms-jpq/coq_nvim',{'branch':'coq'}
-    Plug 'ms-jpq/coq.artifacts',{'branch':'artifacts'}
-    Plug 'ms-jpq/coq.thirdparty',{'branch':'3p'}
+    if index(g:bundle_group,'coq')>=0
+        Plug 'ms-jpq/coq_nvim',{'branch':'coq'}
+        Plug 'ms-jpq/coq.artifacts',{'branch':'artifacts'}
+        Plug 'ms-jpq/coq.thirdparty',{'branch':'3p'}
+    endif
 
-    "配置中
+    if index(g:bundle_group,'null-ls')>=0
+        Plug 'jose-elias-alvarez/null-ls.nvim'
+        Plug 'jay-babu/mason-null-ls.nvim'
+    endif
 
-    Plug 'williamboman/mason.nvim'
-    Plug 'jose-elias-alvarez/null-ls.nvim'
-    Plug 'jay-babu/mason-null-ls.nvim'
+    if index(g:bundle_group,'trouble')>=0
+        Plug 'nvim-tree/nvim-web-devicons'
+        Plug 'folke/trouble.nvim'
+    endif
     
 
     "Plug 'Wansmer/treesj'
     "TODO 代码导航即将到来
-    "Plug 'neovim/nvim-lspconfig'
-    "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-    "Plug 'ray-x/navigator.lua' 
 
 endif
 
@@ -498,47 +510,58 @@ endif
 call plug#end()
 
 if has('nvim')
-     if index(g:bundle_group,'treesitter')>=0
-         source ~/jxy_vim/init/nvim_plug_config/treesitter.lua
-     endif
+    if index(g:bundle_group,'treesitter')>=0
+        source ~/jxy_vim/init/nvim_plug_config/treesitter.lua
+    endif
 
-     if index(g:bundle_group,'color')>=0
-         source ~/jxy_vim/init/nvim_plug_config/nightfox.lua
-     endif
+    if index(g:bundle_group,'color')>=0
+        source ~/jxy_vim/init/nvim_plug_config/nightfox.lua
+    endif
 
-     if index(g:bundle_group,'telescope')>=0 
-         source ~/jxy_vim/init/nvim_plug_config/telescope.lua
-     endif
+    if index(g:bundle_group,'telescope')>=0 
+        source ~/jxy_vim/init/nvim_plug_config/telescope.lua
+    endif
 
-     if index(g:bundle_group,'toggleterm')>=0 
-         source ~/jxy_vim/init/nvim_plug_config/toggleterm.lua
-     endif
+    if index(g:bundle_group,'toggleterm')>=0 
+        source ~/jxy_vim/init/nvim_plug_config/toggleterm.lua
+    endif
 
-     if index(g:bundle_group,'task')>=0
-         source ~/jxy_vim/init/nvim_plug_config/toggletasks.lua
-     endif
+    if index(g:bundle_group,'task')>=0
+        source ~/jxy_vim/init/nvim_plug_config/toggletasks.lua
+    endif
 
-     if index(g:bundle_group,'nvim_ufo_fold')>=0
-         source ~/jxy_vim/init/nvim_plug_config/nvim-ufo.lua
-     endif
+    if index(g:bundle_group,'nvim_ufo_fold')>=0
+        source ~/jxy_vim/init/nvim_plug_config/nvim-ufo.lua
+    endif
 
     " source ~/jxy_vim/init/telescope_mappings.lua
-     source ~/jxy_vim/init/nvim_plug_config/comment.lua
-     " 配置编辑中，还没完成
-"     source ~/jxy_vim/init/treesj.lua
+    if index(g:bundle_group,'comment')>=0
+        source ~/jxy_vim/init/nvim_plug_config/comment.lua
+    endif
+    " 配置编辑中，还没完成
+    "     source ~/jxy_vim/init/treesj.lua
 
-    "source ~/jxy_vim/nvim_navigator.lua
+    if index(g:bundle_group,'navigator')>=0
+        "source ~/jxy_vim/nvim_navigator.lua
+    endif
 
-    source ~/jxy_vim/init/nvim_plug_config/nvim_mason.lua
+    if index(g:bundle_group,'mason')>=0
+        source ~/jxy_vim/init/nvim_plug_config/nvim_mason.lua
+    endif
 
-    source ~/jxy_vim/init/nvim_plug_config/nvim_coq.vim
-    source ~/jxy_vim/init/nvim_plug_config/nvim_coq.lua
+    if index(g:bundle_group,'coq')>=0
+        source ~/jxy_vim/init/nvim_plug_config/nvim_coq.vim
+        source ~/jxy_vim/init/nvim_plug_config/nvim_coq.lua
+    endif
 
-    source ~/jxy_vim/init/nvim_plug_config/nvim_mason_null.lua
+    if index(g:bundle_group,'null-ls')>=0
+        source ~/jxy_vim/init/nvim_plug_config/nvim_mason_null.lua
+        source ~/jxy_vim/init/nvim_plug_config/nvim_null_ls.lua
+    endif
 
-    source ~/jxy_vim/init/nvim_plug_config/nvim_null_ls.lua
-
-
+    if index(g:bundle_group,'trouble')>=0
+        source ~/jxy_vim/init/nvim_plug_config/nvim_trouble.lua
+    endif
     set completeopt=menu,menuone,noselect
 endif
 
