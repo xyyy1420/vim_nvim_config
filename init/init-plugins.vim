@@ -469,10 +469,9 @@ if has('nvim')
     endif
 
     
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-    Plug 'ray-x/navigator.lua'
-    Plug 'nvim-treesitter/nvim-treesitter'
+    "Plug 'neovim/nvim-lspconfig'
+    "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+    "Plug 'ray-x/navigator.lua'
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
 
@@ -481,7 +480,10 @@ if has('nvim')
     Plug 'ms-jpq/coq.thirdparty',{'branch':'3p'}
 
     "配置中
+
+    Plug 'williamboman/mason.nvim'
     Plug 'jose-elias-alvarez/null-ls.nvim'
+    Plug 'jay-babu/mason-null-ls.nvim'
     
 
     "Plug 'Wansmer/treesj'
@@ -497,41 +499,45 @@ call plug#end()
 
 if has('nvim')
      if index(g:bundle_group,'treesitter')>=0
-         source ~/jxy_vim/init/treesitter.lua
+         source ~/jxy_vim/init/nvim_plug_config/treesitter.lua
      endif
 
      if index(g:bundle_group,'color')>=0
-         source ~/jxy_vim/init/nightfox.lua
+         source ~/jxy_vim/init/nvim_plug_config/nightfox.lua
      endif
 
      if index(g:bundle_group,'telescope')>=0 
-         source ~/jxy_vim/init/telescope.lua
+         source ~/jxy_vim/init/nvim_plug_config/telescope.lua
      endif
 
      if index(g:bundle_group,'toggleterm')>=0 
-         source ~/jxy_vim/init/toggleterm.lua
+         source ~/jxy_vim/init/nvim_plug_config/toggleterm.lua
      endif
 
      if index(g:bundle_group,'task')>=0
-         source ~/jxy_vim/init/toggletasks.lua
+         source ~/jxy_vim/init/nvim_plug_config/toggletasks.lua
      endif
 
      if index(g:bundle_group,'nvim_ufo_fold')>=0
-         source ~/jxy_vim/init/nvim-ufo.lua
+         source ~/jxy_vim/init/nvim_plug_config/nvim-ufo.lua
      endif
 
     " source ~/jxy_vim/init/telescope_mappings.lua
-     source ~/jxy_vim/init/comment.lua
+     source ~/jxy_vim/init/nvim_plug_config/comment.lua
      " 配置编辑中，还没完成
 "     source ~/jxy_vim/init/treesj.lua
 
-    source ~/jxy_vim/nvim_navigator.lua
+    "source ~/jxy_vim/nvim_navigator.lua
 
-    source ~/jxy_vim/nvim_mason.lua
+    source ~/jxy_vim/init/nvim_plug_config/nvim_mason.lua
 
-    source ~/jxy_vim/nvim_coq.vim
+    source ~/jxy_vim/init/nvim_plug_config/nvim_coq.vim
+    source ~/jxy_vim/init/nvim_plug_config/nvim_coq.lua
 
-    source ~/jxy_vim/nvim_null_ls.lua
+    source ~/jxy_vim/init/nvim_plug_config/nvim_mason_null.lua
+
+    source ~/jxy_vim/init/nvim_plug_config/nvim_null_ls.lua
+
 
     set completeopt=menu,menuone,noselect
 endif
