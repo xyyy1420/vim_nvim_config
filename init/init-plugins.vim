@@ -473,8 +473,8 @@ if has('nvim')
         Plug 'h-hg/fcitx.nvim'
     endif
 
-     if index(g:bundle_group,'navigator')>=0
-        "Plug 'neovim/nvim-lspconfig'
+    if index(g:bundle_group,'navigator')>=0
+        Plug 'neovim/nvim-lspconfig'
         "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
         "Plug 'ray-x/navigator.lua'
     endif
@@ -482,12 +482,13 @@ if has('nvim')
     if index(g:bundle_group,'mason')>=0
         Plug 'williamboman/mason.nvim'
         Plug 'williamboman/mason-lspconfig.nvim'
+        Plug 'neovim/nvim-lspconfig'
     endif
 
     if index(g:bundle_group,'coq')>=0
         Plug 'ms-jpq/coq_nvim',{'branch':'coq'}
         Plug 'ms-jpq/coq.artifacts',{'branch':'artifacts'}
-        Plug 'ms-jpq/coq.thirdparty',{'branch':'3p'}
+"        Plug 'ms-jpq/coq.thirdparty',{'branch':'3p'}
     endif
 
     if index(g:bundle_group,'null-ls')>=0
@@ -550,8 +551,8 @@ if has('nvim')
     endif
 
     if index(g:bundle_group,'coq')>=0
-        source ~/jxy_vim/init/nvim_plug_config/nvim_coq.vim
-        source ~/jxy_vim/init/nvim_plug_config/nvim_coq.lua
+        source ~/jxy_vim/init/nvim_plug_config/nvim_coq_settings.lua
+"        source ~/jxy_vim/init/nvim_plug_config/nvim_coq.lua
     endif
 
     if index(g:bundle_group,'null-ls')>=0

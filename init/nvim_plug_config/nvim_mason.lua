@@ -12,7 +12,7 @@ require("mason").setup({
 
     -- Controls to which degree logs are written to the log file. It's useful to set this to vim.log.levels.DEBUG when
     -- debugging issues with package installations.
-    log_level=vim.log.levels.ERROR,
+    log_level=vim.log.levels.INFO,
 
     -- Limit for the maximum amount of packages to be installed at the same time. Once this limit is reached, any further
     -- packages that are requested to be installed will be put in a queue.
@@ -33,13 +33,29 @@ require("mason").setup({
     --   - mason.providers.client                 - uses only client-side tooling to resolve metadata
     providers = {
         "mason.providers.registry-api",
+        "mason.providers.client"
     },
 
     ui = {
+        -- Whether to automatically check for new versions when opening the :Mason window.
+        check_outdated_packages_on_open = true,
+
+        -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+        -- border = "none",
+
+        -- -- Width of the window. Accepts:
+        -- -- - Integer greater than 1 for fixed width.
+        -- -- - Float in the range of 0-1 for a percentage of screen width.
+        -- width = 0.8,
+
+        -- -- Height of the window. Accepts:
+        -- -- - Integer greater than 1 for fixed height.
+        -- -- - Float in the range of 0-1 for a percentage of screen height.
+        -- height = 0.9,
         icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
+            package_installed = "Y",
+            package_pending = "P",
+            package_uninstalled = "N"
         },
         keymaps = {
             -- Keymap to expand a package
@@ -66,4 +82,8 @@ require("mason").setup({
 
 
 })
-require("mason-lspconfig").setup({})
+require("mason-lspconfig").setup({
+    automatic_installation=true,
+})
+require("mason-lspconfig").setup_handlers{
+}
