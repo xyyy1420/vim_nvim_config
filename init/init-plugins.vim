@@ -548,10 +548,13 @@ if has('nvim')
 
     if index(g:bundle_group,'mason')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_mason.lua
+        
     endif
 
     if index(g:bundle_group,'coq')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_coq_settings.lua
+        
+        
 "        source ~/jxy_vim/init/nvim_plug_config/nvim_coq.lua
     endif
 
