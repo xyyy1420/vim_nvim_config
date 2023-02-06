@@ -23,7 +23,7 @@ if !exists('g:bundle_group')
         let g:bundle_group += [ 'toggleterm' ]
         let g:bundle_group += [ 'harpoon' ]
         let g:bundle_group += [ 'fcitx' ]
-        let g:bundle_group += [ 'nvim_ufo_fold' ]
+"        let g:bundle_group += [ 'nvim_ufo_fold' ]
         let g:bundle_group += [ 'todo-comments' ]
 "        let g:bundle_group += [ 'task' ]
     endif
