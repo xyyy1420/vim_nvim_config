@@ -28,13 +28,6 @@ if !exists('g:bundle_group')
 "        let g:bundle_group += [ 'task' ]
     endif
 
-"    let g:bundle_group+=['comment']
-"    let g:bundle_group+=['navigator']
-"    let g:bundle_group+=['mason']
-"    let g:bundle_group+=['coq']
-"    let g:bundle_group+=['null-ls']
-"    let g:bundle_group+=['trouble']
-
     if has ('vim')
         let g:bundle_group += [ 'ui' ]
         let g:bundle_group += [ 'tags' ]
@@ -473,37 +466,6 @@ if has('nvim')
         Plug 'h-hg/fcitx.nvim'
     endif
 
-     if index(g:bundle_group,'navigator')>=0
-        "Plug 'neovim/nvim-lspconfig'
-        "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-        "Plug 'ray-x/navigator.lua'
-    endif
-   
-    if index(g:bundle_group,'mason')>=0
-        Plug 'williamboman/mason.nvim'
-        Plug 'williamboman/mason-lspconfig.nvim'
-    endif
-
-    if index(g:bundle_group,'coq')>=0
-        Plug 'ms-jpq/coq_nvim',{'branch':'coq'}
-        Plug 'ms-jpq/coq.artifacts',{'branch':'artifacts'}
-        Plug 'ms-jpq/coq.thirdparty',{'branch':'3p'}
-    endif
-
-    if index(g:bundle_group,'null-ls')>=0
-        Plug 'jose-elias-alvarez/null-ls.nvim'
-        Plug 'jay-babu/mason-null-ls.nvim'
-    endif
-
-    if index(g:bundle_group,'trouble')>=0
-        Plug 'nvim-tree/nvim-web-devicons'
-        Plug 'folke/trouble.nvim'
-    endif
-    
-
-    "Plug 'Wansmer/treesj'
-    "TODO 代码导航即将到来
-
 endif
 
 
@@ -541,27 +503,5 @@ if has('nvim')
     " 配置编辑中，还没完成
     "     source ~/jxy_vim/init/treesj.lua
 
-    if index(g:bundle_group,'navigator')>=0
-        "source ~/jxy_vim/nvim_navigator.lua
-    endif
-
-    if index(g:bundle_group,'mason')>=0
-        source ~/jxy_vim/init/nvim_plug_config/nvim_mason.lua
-    endif
-
-    if index(g:bundle_group,'coq')>=0
-        source ~/jxy_vim/init/nvim_plug_config/nvim_coq.vim
-        source ~/jxy_vim/init/nvim_plug_config/nvim_coq.lua
-    endif
-
-    if index(g:bundle_group,'null-ls')>=0
-        source ~/jxy_vim/init/nvim_plug_config/nvim_mason_null.lua
-        source ~/jxy_vim/init/nvim_plug_config/nvim_null_ls.lua
-    endif
-
-    if index(g:bundle_group,'trouble')>=0
-        source ~/jxy_vim/init/nvim_plug_config/nvim_trouble.lua
-    endif
-    set completeopt=menu,menuone,noselect
 endif
 
