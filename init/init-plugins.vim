@@ -158,7 +158,6 @@ if index(g:bundle_group,'color')>=0
     if has('nvim')
         "Plug 'folke/tokyonight.nvim',{'branch':'main'}
         Plug 'EdenEast/nightfox.nvim'
-        Plug 'morhetz/gruvbox'
         Plug 'bluz71/vim-nightfly-colors'
     else
         Plug 'ayu-theme/ayu-vim'
@@ -505,6 +504,8 @@ if has('nvim')
         Plug 'mhartington/formatter.nvim'
     endif
 
+    Plug 'lewis6991/hover.nvim'
+
     "Plug 'Wansmer/treesj'
 
 endif
@@ -569,6 +570,8 @@ if has('nvim')
     endif   
     if index(g:bundle_group,'formater')>=0
     endif   
+
+    source ~/jxy_vim/init/nvim_plug_config/nvim_hover.lua
 
     set completeopt=menu,menuone,noselect
 endif

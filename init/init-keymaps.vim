@@ -95,30 +95,6 @@ noremap <silent><leader>9 <esc>9gt<cr>
 noremap <silent><leader>0 <esc>10gt<cr>
 
 "----------------------------------------------------------------------
-" 设置ALT切换tab 
-"----------------------------------------------------------------------
-noremap <silent><m-1> :tabn 1<cr>
-noremap <silent><m-2> :tabn 2<cr>
-noremap <silent><m-3> :tabn 3<cr>
-noremap <silent><m-4> :tabn 4<cr>
-noremap <silent><m-5> :tabn 5<cr>
-noremap <silent><m-6> :tabn 6<cr>
-noremap <silent><m-7> :tabn 7<cr>
-noremap <silent><m-8> :tabn 8<cr>
-noremap <silent><m-9> :tabn 9<cr>
-noremap <silent><m-0> :tabn 0<cr>
-inoremap <silent><m-1> <ESC>:tabn 1<cr>
-inoremap <silent><m-2> <ESC>:tabn 2<cr>
-inoremap <silent><m-3> <ESC>:tabn 3<cr>
-inoremap <silent><m-4> <ESC>:tabn 4<cr>
-inoremap <silent><m-5> <ESC>:tabn 5<cr>
-inoremap <silent><m-6> <ESC>:tabn 6<cr>
-inoremap <silent><m-7> <ESC>:tabn 7<cr>
-inoremap <silent><m-8> <ESC>:tabn 8<cr>
-inoremap <silent><m-9> <ESC>:tabn 9<cr>
-inoremap <silent><m-0> <ESC>:tabn 0<cr>
-
-"----------------------------------------------------------------------
 " 快速打开vim配置文件，并在保存时刷新vim
 "----------------------------------------------------------------------
 map <silent> <Leader>ss :source ~/.vimrc<cr>
@@ -126,40 +102,19 @@ map <silent> <Leader>ee :e ~/.vimrc<cr>
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
 "----------------------------------------------------------------------
-" 快速打开buffers
+" 快速打开buffers 这部分迁移到toggleterm
 "----------------------------------------------------------------------
 "noremap <silent><leader>b :buffers<cr>
 
 "----------------------------------------------------------------------
-" 快速保存会话
-"----------------------------------------------------------------------
-noremap <silent><leader>mks :mksession Session.vim<cr>
-noremap <silent><leader>sas :mks!<cr>
-
-"----------------------------------------------------------------------
 " 映射\y为保存选中内容到临时文件中 \p恢复出来
 "----------------------------------------------------------------------
-vmap <leader>y :w! /tmp/vitmp<CR>
-nmap <leader>p :r /tmp/vitmp<CR>
-
-
-"----------------------------------------------------------------------
-" 映射符号表查找键位
-"----------------------------------------------------------------------
-"noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
-"noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
-"noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
-"noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
-"noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
-"noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-"noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-"noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
-"noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
-"noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
+vnoremap <leader>y :w! /tmp/vitmp<CR>
+nnoremap <leader>p :r /tmp/vitmp<CR>
 
 "使用Ctrl j/k来快速跳转上次或者下次修改的地方
-nmap <C-j> <C-i>
-nmap <C-k> <C-o>
+nnoremap <C-j> <C-i>
+nnoremap <C-k> <C-o>
 
 
 "每次搜索跳转的时候都将光标处放置在窗口中央
