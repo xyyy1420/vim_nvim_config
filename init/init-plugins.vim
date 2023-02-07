@@ -23,8 +23,8 @@ if !exists('g:bundle_group')
         let g:bundle_group += [ 'toggleterm' ]
         let g:bundle_group += [ 'harpoon' ]
         let g:bundle_group += [ 'fcitx' ]
-"        let g:bundle_group += [ 'nvim_ufo_fold' ]
         let g:bundle_group += [ 'todo-comments' ]
+        let g:bundle_group += [ 'formater' ]
 "        let g:bundle_group += [ 'task' ]
     endif
 
@@ -462,11 +462,6 @@ if has('nvim')
         nmap <silent> <leader>np :lua require("harpoon.ui").nav_prev()<CR>
     endif
 
-    "代码折叠，配置文件nvim-ufo.lua
-    if index(g:bundle_group,'nvim_ufo_fold')>=0
-        Plug 'kevinhwang91/promise-async'
-        Plug 'kevinhwang91/nvim-ufo'
-    endif
 
     "自动中英文切换
     if index(g:bundle_group,'fcitx')>=0
@@ -500,10 +495,17 @@ if has('nvim')
         Plug 'nvim-tree/nvim-web-devicons'
         Plug 'folke/trouble.nvim'
     endif
-    
+ 
+    if index(g:bundle_group,'todo-comments')>=0
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'folke/todo-comments.nvim'
+    endif   
+
+    if index(g:bundle_group,'formater')>=0
+        Plug 'mhartington/formatter.nvim'
+    endif
 
     "Plug 'Wansmer/treesj'
-    "TODO 代码导航即将到来
 
 endif
 
@@ -529,10 +531,6 @@ if has('nvim')
 
     if index(g:bundle_group,'task')>=0
         source ~/jxy_vim/init/nvim_plug_config/toggletasks.lua
-    endif
-
-    if index(g:bundle_group,'nvim_ufo_fold')>=0
-        source ~/jxy_vim/init/nvim_plug_config/nvim-ufo.lua
     endif
 
     " source ~/jxy_vim/init/telescope_mappings.lua
@@ -562,6 +560,16 @@ if has('nvim')
     if index(g:bundle_group,'trouble')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_trouble.lua
     endif
+ 
+    " HACK:
+    " NOTE:
+    " TODO:
+    if index(g:bundle_group,'todo-comments')>=0
+        source ~/jxy_vim/init/nvim_plug_config/nvim_todo_comments.lua
+    endif   
+    if index(g:bundle_group,'formater')>=0
+    endif   
+
     set completeopt=menu,menuone,noselect
 endif
 
