@@ -24,7 +24,7 @@ if !exists('g:bundle_group')
         let g:bundle_group += [ 'harpoon' ]
         let g:bundle_group += [ 'fcitx' ]
         let g:bundle_group += [ 'todo-comments' ]
-        let g:bundle_group += [ 'formater' ]
+"        let g:bundle_group += [ 'formater' ]
 "        let g:bundle_group += [ 'task' ]
     endif
 
@@ -33,7 +33,6 @@ if !exists('g:bundle_group')
     let g:bundle_group+=['mason']
     let g:bundle_group+=['coq']
 "    let g:bundle_group+=['null-ls']
-"    let g:bundle_group+=['trouble']
 
     if has ('vim')
         let g:bundle_group += [ 'ui' ]
@@ -59,24 +58,8 @@ call plug#begin(get(g:,'bundle_home','~/.vim/plugged'))
 if index(g:bundle_group,'basic')>=0
     Plug 'ryanoasis/vim-devicons'
 
-    "快速移动
-    Plug 'easymotion/vim-easymotion'
-    let g:EasyMotion_do_mapping=0
-    nmap s <Plug>(easymotion-overwin-f)
-    nmap s <Plug>(easymotion-overwin-f2)
-
-    let g:EasyMotion_smartcase=1
-
-    map <leader>l <Plug>(easymotion-lineforward)
-    map <leader>j <Plug>(easymotion-j)
-    map <leader>k <Plug>(easymotion-k)
-    map <leader>h <Plug>(easymotion-linebackward)
-    map <leader>w <Plug>(easymotion-w)
-    map <leader>b <Plug>(easymotion-b)
-    let g:EasyMotion_startofline=0
-    let g:EasyMotion_smartcase=1
-"    map / <Plug>(easymotion-sn)
-"    omap / <Plug>(easymotion-tn)
+    Plug 'ggandor/leap.nvim'
+    Plug 'tpope/vim-repeat'
 
     " 注释
     Plug 'numToStr/Comment.nvim'
@@ -203,15 +186,6 @@ if index(g:bundle_group,'g_format')>=0
 
 endif
 
-"nvim特有的格式化，需要逐个语言配置，工作量较大，还在放置
-if index(g:bundle_group,'neoformat')>=0
-    Plug 'sbdchd/neoformat'
-    let g:neoformat_enabled_python = ['autopep8','yapf','docformatter']
-    let g:neoformat_enabled_c=['astyle']
-    let g:neoformat_enabled_cpp=['astyle']
-    let g:neoformat_enabled_go=['gofmt']
-endif
-
 "自行配置的clang格式化，还没完成
 if index(g:bundle_group,'format')>=0
 
@@ -333,6 +307,7 @@ if index(g:bundle_group,'coc')>=0
 "    inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 "    inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 "    inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
     let g:coc_snippet_next = '<C-j>'
     let g:coc_snippet_prev = '<C-k>'
 
@@ -344,12 +319,6 @@ if index(g:bundle_group,'coc')>=0
     else
         inoremap <silent><expr> <c-@> coc#refresh()
     endif
-
-"	 使用telescope-coc插件替代了这部分功能
-"    nmap <silent> <leader>gd <Plug>(coc-definition)
-"    nmap <silent> <leader>gy <Plug>(coc-type-definition)
-"    nmap <silent> <leader>gi <Plug>(coc-implementation)
-"    nmap <silent> <leader>gr <Plug>(coc-reference)
 
     function! ShowDocumentation()
         if CocAction('hasProvider','hover')
@@ -482,17 +451,12 @@ if has('nvim')
     if index(g:bundle_group,'coq')>=0
         Plug 'ms-jpq/coq_nvim',{'branch':'coq'}
         Plug 'ms-jpq/coq.artifacts',{'branch':'artifacts'}
-"        Plug 'ms-jpq/coq.thirdparty',{'branch':'3p'}
+        Plug 'ms-jpq/coq.thirdparty',{'branch':'3p'}
     endif
 
     if index(g:bundle_group,'null-ls')>=0
         Plug 'jose-elias-alvarez/null-ls.nvim'
         Plug 'jay-babu/mason-null-ls.nvim'
-    endif
-
-    if index(g:bundle_group,'trouble')>=0
-        Plug 'nvim-tree/nvim-web-devicons'
-        Plug 'folke/trouble.nvim'
     endif
  
     if index(g:bundle_group,'todo-comments')>=0
@@ -503,8 +467,6 @@ if has('nvim')
     if index(g:bundle_group,'formater')>=0
         Plug 'mhartington/formatter.nvim'
     endif
-
-    Plug 'lewis6991/hover.nvim'
 
     "Plug 'Wansmer/treesj'
 
@@ -534,7 +496,6 @@ if has('nvim')
         source ~/jxy_vim/init/nvim_plug_config/toggletasks.lua
     endif
 
-    " source ~/jxy_vim/init/telescope_mappings.lua
     if index(g:bundle_group,'comment')>=0
         source ~/jxy_vim/init/nvim_plug_config/comment.lua
     endif
@@ -557,10 +518,6 @@ if has('nvim')
         source ~/jxy_vim/init/nvim_plug_config/nvim_mason_null.lua
         source ~/jxy_vim/init/nvim_plug_config/nvim_null_ls.lua
     endif
-
-    if index(g:bundle_group,'trouble')>=0
-        source ~/jxy_vim/init/nvim_plug_config/nvim_trouble.lua
-    endif
  
     " HACK:
     " NOTE:
@@ -568,11 +525,13 @@ if has('nvim')
     if index(g:bundle_group,'todo-comments')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_todo_comments.lua
     endif   
+
     if index(g:bundle_group,'formater')>=0
+        source ~/jxy_vim/init/nvim_plug_config/nvim_formater.lua
     endif   
 
-    source ~/jxy_vim/init/nvim_plug_config/nvim_hover.lua
+    "TODO:配置leap移动
+    source ~/jxy_vim/init/nvim_plug_config/nvim_leap.lua
 
-    set completeopt=menu,menuone,noselect
 endif
 
