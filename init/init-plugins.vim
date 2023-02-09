@@ -31,7 +31,9 @@ if !exists('g:bundle_group')
 "    let g:bundle_group+=['comment']
     let g:bundle_group+=['navigator']
     let g:bundle_group+=['mason']
-    let g:bundle_group+=['coq']
+    let g:bundle_group+=['nvim_cmp']
+    let g:bundle_group+=['indent_blankline']
+"    let g:bundle_group+=['coq']
 "    let g:bundle_group+=['null-ls']
 
     if has ('vim')
@@ -468,6 +470,36 @@ if has('nvim')
         Plug 'mhartington/formatter.nvim'
     endif
 
+    if index(g:bundle_group,'nvim_cmp')>=0
+        Plug 'neovim/nvim-lspconfig'
+        Plug 'hrsh7th/cmp-nvim-lsp'
+        Plug 'hrsh7th/cmp-buffer'
+        Plug 'hrsh7th/cmp-path'
+        Plug 'hrsh7th/cmp-cmdline'
+        Plug 'hrsh7th/nvim-cmp'
+
+        " For vsnip users.
+        Plug 'hrsh7th/cmp-vsnip'
+        Plug 'hrsh7th/vim-vsnip'
+
+        " For luasnip users.
+        " Plug 'L3MON4D3/LuaSnip'
+        " Plug 'saadparwaiz1/cmp_luasnip'
+
+        " For ultisnips users.
+        " Plug 'SirVer/ultisnips'
+        " Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
+        " For snippy users.
+        " Plug 'dcampos/nvim-snippy'
+        " Plug 'dcampos/cmp-snippy'
+    endif
+
+    if index(g:bundle_group,'indent_blankline')>=0
+        Plug 'lukas-reineke/indent-blankline.nvim'
+    endif
+
+
     "Plug 'Wansmer/treesj'
 
 endif
@@ -530,8 +562,18 @@ if has('nvim')
         source ~/jxy_vim/init/nvim_plug_config/nvim_formater.lua
     endif   
 
+    if index(g:bundle_group,'nvim_cmp')>=0
+        set completeopt=menu,menuone,noselect
+        source ~/jxy_vim/init/nvim_plug_config/nvim_cmp.lua
+    endif   
+
     "TODO:配置leap移动
     source ~/jxy_vim/init/nvim_plug_config/nvim_leap.lua
+
+    if index(g:bundle_group,'indent_blankline')>=0
+        source ~/jxy_vim/init/nvim_plug_config/nvim_indent_blank.lua
+    endif
+
 
 endif
 
