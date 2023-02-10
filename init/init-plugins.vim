@@ -8,7 +8,7 @@ if !exists('g:bundle_group')
     let g:bundle_group += [ 'color' ]
     let g:bundle_group += [ 'header' ]
 
-    let g:bundle_group += [ 'g_format' ]
+"    let g:bundle_group += [ 'g_format' ]
 "    let g:bundle_group += [ 'format' ]
 
     "let g:bundle_group += [ 'coc' ]
@@ -24,7 +24,6 @@ if !exists('g:bundle_group')
         let g:bundle_group += [ 'harpoon' ]
         let g:bundle_group += [ 'fcitx' ]
         let g:bundle_group += [ 'todo-comments' ]
-"        let g:bundle_group += [ 'formater' ]
 "        let g:bundle_group += [ 'task' ]
     endif
 
@@ -33,8 +32,7 @@ if !exists('g:bundle_group')
     let g:bundle_group+=['mason']
     let g:bundle_group+=['nvim_cmp']
     let g:bundle_group+=['indent_blankline']
-"    let g:bundle_group+=['coq']
-"    let g:bundle_group+=['null-ls']
+    let g:bundle_group+=['null-ls']
 
     if has ('vim')
         let g:bundle_group += [ 'ui' ]
@@ -60,13 +58,12 @@ call plug#begin(get(g:,'bundle_home','~/.vim/plugged'))
 if index(g:bundle_group,'basic')>=0
     Plug 'ryanoasis/vim-devicons'
 
+    "快速移动
     Plug 'ggandor/leap.nvim'
     Plug 'tpope/vim-repeat'
 
     " 注释
     Plug 'numToStr/Comment.nvim'
-
-
 endif
 
 "----------------------------------------------------------------------
@@ -100,8 +97,6 @@ if index(g:bundle_group,'fzf')>=0
     " Snippets
     " Commits
     " ------------------------------------
-
-
 endif
 
 "----------------------------------------------------------------------
@@ -450,13 +445,9 @@ if has('nvim')
         Plug 'neovim/nvim-lspconfig'
     endif
 
-    if index(g:bundle_group,'coq')>=0
-        Plug 'ms-jpq/coq_nvim',{'branch':'coq'}
-        Plug 'ms-jpq/coq.artifacts',{'branch':'artifacts'}
-        Plug 'ms-jpq/coq.thirdparty',{'branch':'3p'}
-    endif
 
     if index(g:bundle_group,'null-ls')>=0
+        Plug 'nvim-lua/plenary.nvim'
         Plug 'jose-elias-alvarez/null-ls.nvim'
         Plug 'jay-babu/mason-null-ls.nvim'
     endif
@@ -466,9 +457,6 @@ if has('nvim')
         Plug 'folke/todo-comments.nvim'
     endif   
 
-    if index(g:bundle_group,'formater')>=0
-        Plug 'mhartington/formatter.nvim'
-    endif
 
     if index(g:bundle_group,'nvim_cmp')>=0
         Plug 'neovim/nvim-lspconfig'
@@ -542,9 +530,6 @@ if has('nvim')
         source ~/jxy_vim/init/nvim_plug_config/nvim_mason.lua
     endif
 
-    if index(g:bundle_group,'coq')>=0
-        source ~/jxy_vim/init/nvim_plug_config/nvim_coq_settings.lua
-    endif
 
     if index(g:bundle_group,'null-ls')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_mason_null.lua
@@ -554,13 +539,13 @@ if has('nvim')
     " HACK:
     " NOTE:
     " TODO:
+    " BUG: 
+    " FIX:
+ 
     if index(g:bundle_group,'todo-comments')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_todo_comments.lua
     endif   
 
-    if index(g:bundle_group,'formater')>=0
-        source ~/jxy_vim/init/nvim_plug_config/nvim_formater.lua
-    endif   
 
     if index(g:bundle_group,'nvim_cmp')>=0
         set completeopt=menu,menuone,noselect
@@ -568,7 +553,10 @@ if has('nvim')
     endif   
 
     "TODO:配置leap移动
-    source ~/jxy_vim/init/nvim_plug_config/nvim_leap.lua
+    if index(g:bundle_group,'basic')>=0
+        source ~/jxy_vim/init/nvim_plug_config/nvim_leap.lua
+
+    endif
 
     if index(g:bundle_group,'indent_blankline')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_indent_blank.lua
