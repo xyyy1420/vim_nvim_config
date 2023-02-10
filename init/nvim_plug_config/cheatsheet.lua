@@ -1,3 +1,1 @@
-require("cheatsheet").setup({
-	
-})
+require("cheatsheet").setup({})
