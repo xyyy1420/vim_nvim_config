@@ -8,9 +8,6 @@ if !exists('g:bundle_group')
     let g:bundle_group += [ 'color' ]
     let g:bundle_group += [ 'header' ]
 
-"    let g:bundle_group += [ 'g_format' ]
-"    let g:bundle_group += [ 'format' ]
-
     "let g:bundle_group += [ 'coc' ]
     let g:bundle_group += [ 'pandoc' ]
     let g:bundle_group += [ 'fzf' ]
@@ -29,8 +26,6 @@ if !exists('g:bundle_group')
     endif
 
 "    let g:bundle_group+=['comment']
-"    let g:bundle_group+=['navigator']
-    
     let g:bundle_group+=['mason']
     let g:bundle_group+=['nvim_cmp']
     let g:bundle_group+=['null-ls']
@@ -436,11 +431,6 @@ if has('nvim')
         Plug 'h-hg/fcitx.nvim'
     endif
 
-    if index(g:bundle_group,'navigator')>=0
-        Plug 'neovim/nvim-lspconfig'
-        Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-        Plug 'ray-x/navigator.lua'
-    endif
    
     if index(g:bundle_group,'mason')>=0
         Plug 'williamboman/mason.nvim'
@@ -528,10 +518,6 @@ if has('nvim')
     endif
     " 配置编辑中，还没完成
     "     source ~/jxy_vim/init/treesj.lua
-
-    if index(g:bundle_group,'navigator')>=0
-        source ~/jxy_vim/init/nvim_plug_config/nvim_navigator.lua
-    endif
 
     if index(g:bundle_group,'mason')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_mason.lua
