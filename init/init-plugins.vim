@@ -24,15 +24,17 @@ if !exists('g:bundle_group')
         let g:bundle_group += [ 'harpoon' ]
         let g:bundle_group += [ 'fcitx' ]
         let g:bundle_group += [ 'todo-comments' ]
+"        let g:bundle_group += [ 'lspsaga' ]
 "        let g:bundle_group += [ 'task' ]
     endif
 
 "    let g:bundle_group+=['comment']
-    let g:bundle_group+=['navigator']
+"    let g:bundle_group+=['navigator']
+    
     let g:bundle_group+=['mason']
     let g:bundle_group+=['nvim_cmp']
-    let g:bundle_group+=['indent_blankline']
     let g:bundle_group+=['null-ls']
+    let g:bundle_group+=['indent_blankline']
 
     if has ('vim')
         let g:bundle_group += [ 'ui' ]
@@ -488,6 +490,10 @@ if has('nvim')
         Plug 'lukas-reineke/indent-blankline.nvim'
     endif
 
+    if index(g:bundle_group,'lspsaga')>=0
+        Plug 'glepnir/lspsaga.nvim'
+    endif
+
 
     "Plug 'Wansmer/treesj'
 
@@ -562,6 +568,7 @@ if has('nvim')
     if index(g:bundle_group,'indent_blankline')>=0
         source ~/jxy_vim/init/nvim_plug_config/nvim_indent_blank.lua
     endif
+
 
 
 endif
