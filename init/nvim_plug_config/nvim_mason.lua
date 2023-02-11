@@ -104,3 +104,6 @@ require("mason-lspconfig").setup_handlers {
         require("lspconfig")[server_name].setup { on_attach = lsp_on_attach }
     end,
 }
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.offsetEncoding = { "utf-16" }
+require("lspconfig").clangd.setup({ capabilities = capabilities, on_attach = lsp_on_attach })
