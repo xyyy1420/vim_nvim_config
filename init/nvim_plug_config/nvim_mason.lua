@@ -99,11 +99,13 @@ local lsp_on_attach = function(client, bufnr)
     -- vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 require("mason-lspconfig").setup_handlers {
     function(server_name)
-        require("lspconfig")[server_name].setup { on_attach = lsp_on_attach }
+        require("lspconfig")[server_name].setup { on_attach = lsp_on_attach, capabilities = capabilities }
     end,
 }
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.offsetEncoding = { "utf-16" }
-require("lspconfig").clangd.setup({ capabilities = capabilities, on_attach = lsp_on_attach })
+--local capabilities = vim.lsp.protocol.make_client_capabilities()
+--capabilities.offsetEncoding = { "utf-16" }
+--require("lspconfig").clangd.setup({ capabilities = capabilities, on_attach = lsp_on_attach })

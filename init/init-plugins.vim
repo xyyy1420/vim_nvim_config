@@ -27,6 +27,9 @@ if !exists('g:bundle_group')
     let g:bundle_group+=['nvim_cmp']
     let g:bundle_group+=['null-ls']
     let g:bundle_group+=['indent_blankline']
+    let g:bundle_group+=['registers']
+
+"    let g:bundle_group+=['autopairs']
 
 endif
 
@@ -224,12 +227,12 @@ if index(g:bundle_group,'nvim_cmp')>=0
     Plug 'hrsh7th/vim-vsnip'
 
     " For luasnip users.
-    " Plug 'L3MON4D3/LuaSnip'
-    " Plug 'saadparwaiz1/cmp_luasnip'
+    "Plug 'L3MON4D3/LuaSnip'
+    "Plug 'saadparwaiz1/cmp_luasnip'
 
     " For ultisnips users.
-    " Plug 'SirVer/ultisnips'
-    " Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+    "Plug 'SirVer/ultisnips'
+    "Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
     " For snippy users.
     " Plug 'dcampos/nvim-snippy'
@@ -242,6 +245,14 @@ endif
 
 if index(g:bundle_group,'lspsaga')>=0
     Plug 'glepnir/lspsaga.nvim'
+endif
+
+if index(g:bundle_group,'autopairs')>=0
+    Plug 'windwp/nvim-autopairs'
+endif
+
+if index(g:bundle_group,'registers')>=0
+    Plug 'tversteeg/registers.nvim'
 endif
 
 
@@ -285,12 +296,6 @@ if index(g:bundle_group,'null-ls')>=0
     source ~/jxy_vim/init/nvim_plug_config/nvim_null_ls.lua
 endif
 
-" HACK:
-" NOTE:
-" TODO:
-" BUG: 
-" FIX:
-
 if index(g:bundle_group,'todo-comments')>=0
     source ~/jxy_vim/init/nvim_plug_config/nvim_todo_comments.lua
 endif   
@@ -299,6 +304,7 @@ if index(g:bundle_group,'nvim_cmp')>=0
     set completeopt=menu,menuone,noselect
     source ~/jxy_vim/init/nvim_plug_config/nvim_cmp.lua
 endif   
+
 
 "TODO:配置leap移动
 if index(g:bundle_group,'basic')>=0
@@ -309,6 +315,16 @@ endif
 if index(g:bundle_group,'indent_blankline')>=0
     source ~/jxy_vim/init/nvim_plug_config/nvim_indent_blank.lua
 endif
+
+if index(g:bundle_group,'autopairs')>=0
+    source ~/jxy_vim/init/nvim_plug_config/nvim_autopairs.lua
+endif
+
+
+if index(g:bundle_group,'registers')>=0
+    source ~/jxy_vim/init/nvim_plug_config/nvim_registers.lua
+endif
+
 
 " 配置编辑中，还没完成
 "     source ~/jxy_vim/init/treesj.lua
