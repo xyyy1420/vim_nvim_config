@@ -6,7 +6,7 @@
 if !exists('g:bundle_group')
     let g:bundle_group = ['basic' ]
     let g:bundle_group += [ 'color' ]
-    let g:bundle_group += [ 'header' ]
+"    let g:bundle_group += [ 'header' ]
 
     let g:bundle_group += [ 'pandoc' ]
     let g:bundle_group += [ 'fzf' ]
@@ -28,6 +28,8 @@ if !exists('g:bundle_group')
     let g:bundle_group+=['null-ls']
     let g:bundle_group+=['indent_blankline']
     let g:bundle_group+=['registers']
+"    let g:bundle_group+=['doxygen']
+"    let g:bundle_group+=['kdl']
 
 "    let g:bundle_group+=['autopairs']
 
@@ -125,6 +127,10 @@ endif
 "nvim语法解析器 配置文件treesitter.lua
 if index(g:bundle_group,'treesitter')>=0
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
+    set nofoldenable
 endif
 
 "一个高度可扩展的列表模糊查找器，配置文件 telescope.lua
@@ -255,6 +261,15 @@ if index(g:bundle_group,'registers')>=0
     Plug 'tversteeg/registers.nvim'
 endif
 
+if index(g:bundle_group,'doxygen')>=0
+    Plug 'paopaol/cmp-doxygen'
+endif
+
+if index(g:bundle_group,'kdl')>=0
+    Plug 'imsnif/kdl.vim'
+endif
+
+
 
 "Plug 'Wansmer/treesj'
 
@@ -323,6 +338,10 @@ endif
 
 if index(g:bundle_group,'registers')>=0
     source ~/jxy_vim/init/nvim_plug_config/nvim_registers.lua
+endif
+
+if index(g:bundle_group,'doxygen')>=0
+    source ~/jxy_vim/init/nvim_plug_config/nvim_doxygen.lua
 endif
 
 
