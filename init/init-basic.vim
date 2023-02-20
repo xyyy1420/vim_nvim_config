@@ -156,9 +156,9 @@ set formatoptions+=B
 "----------------------------------------------------------------------
 
 if has('folding')
-    set foldenable
-    set fdm=indent
-    set foldlevel=99
+"    set foldenable
+"    set fdm=indent
+"    set foldlevel=99
     nnoremap <space> za
 endif
 
