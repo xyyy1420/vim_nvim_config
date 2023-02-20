@@ -80,6 +80,12 @@ require("mason-lspconfig").setup({
     automatic_installation = true,
 })
 
+local opts = { noremap = true, silent = true }
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', 'gj', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', 'gk', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', 'gq', vim.diagnostic.setloclist, opts)
+
 local lsp_on_attach = function(client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
