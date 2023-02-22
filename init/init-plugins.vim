@@ -28,8 +28,6 @@ if !exists('g:bundle_group')
     let g:bundle_group+=['null-ls']
     let g:bundle_group+=['indent_blankline']
     let g:bundle_group+=['registers']
-"    let g:bundle_group+=['doxygen']
-"    let g:bundle_group+=['kdl']
 
 "    let g:bundle_group+=['autopairs']
 
@@ -261,15 +259,6 @@ if index(g:bundle_group,'registers')>=0
     Plug 'tversteeg/registers.nvim'
 endif
 
-if index(g:bundle_group,'doxygen')>=0
-    Plug 'paopaol/cmp-doxygen'
-endif
-
-if index(g:bundle_group,'kdl')>=0
-    Plug 'imsnif/kdl.vim'
-endif
-
-
 
 "Plug 'Wansmer/treesj'
 
@@ -324,7 +313,6 @@ endif
 "TODO:配置leap移动
 if index(g:bundle_group,'basic')>=0
     source ~/jxy_vim/init/nvim_plug_config/nvim_leap.lua
-
 endif
 
 if index(g:bundle_group,'indent_blankline')>=0
@@ -338,10 +326,6 @@ endif
 
 if index(g:bundle_group,'registers')>=0
     source ~/jxy_vim/init/nvim_plug_config/nvim_registers.lua
-endif
-
-if index(g:bundle_group,'doxygen')>=0
-    source ~/jxy_vim/init/nvim_plug_config/nvim_doxygen.lua
 endif
 
 
