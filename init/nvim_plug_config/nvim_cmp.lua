@@ -11,14 +11,14 @@ end
 
 local cmp = require("cmp")
 
---local luasnip = require("luasnip")
+local luasnip = require("luasnip")
 
 cmp.setup({
     snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-            -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
             -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
             -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
         end,
@@ -27,7 +27,7 @@ cmp.setup({
         -- completion = cmp.config.window.bordered(),
         -- documentation = cmp.config.window.bordered(),
     },
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
         ["<C-Space>"] = cmp.mapping.complete({}),
 
         ["<CR>"] = cmp.mapping.confirm({
@@ -39,40 +39,40 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping.select_prev_item(),
 
 
-        ["<C-j>"] = cmp.mapping(function(_)
-            if vim.fn["vsnip#available"](1) == 1 then
-                feedkey("<Plug>(vsnip-expand-or-jump)", "")
+        --["<C-j>"] = cmp.mapping(function(_)
+        --    if vim.fn["vsnip#available"](1) == 1 then
+        --        feedkey("<Plug>(vsnip-expand-or-jump)", "")
+        --    end
+        --end, { "i", "s" }),
+
+        --["<C-h>"] = cmp.mapping(function()
+        --    if vim.fn["vsnip#jumpable"]( -1) == 1 then
+        --        feedkey("<Plug>(vsnip-jump-prev)", "")
+        --    end
+        --end, { "i", "s" }),
+
+
+        ["<C-j>"] = cmp.mapping(function(fallback)
+            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+            -- they way you will only jump inside the snippet region
+            if luasnip.expand_or_locally_jumpable() then
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
             end
         end, { "i", "s" }),
 
-        ["<C-h>"] = cmp.mapping(function()
-            if vim.fn["vsnip#jumpable"]( -1) == 1 then
-                feedkey("<Plug>(vsnip-jump-prev)", "")
+        ["<C-k>"] = cmp.mapping(function(fallback)
+            if luasnip.jumpable( -1) then
+                luasnip.jump( -1)
+            else
+                fallback()
             end
         end, { "i", "s" }),
 
-
-        -- ["<C-j>"] = cmp.mapping(function(fallback)
-        --     -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-        --     -- they way you will only jump inside the snippet region
-        --     if luasnip.expand_or_locally_jumpable() then
-        --         luasnip.expand_or_jump()
-        --     elseif has_words_before() then
-        --         cmp.complete()
-        --     else
-        --         fallback()
-        --     end
-        -- end, { "i", "s" }),
-
-        -- ["<C-h>"] = cmp.mapping(function(fallback)
-        --     if luasnip.jumpable( -1) then
-        --         luasnip.jump( -1)
-        --     else
-        --         fallback()
-        --     end
-        -- end, { "i", "s" }),
-
-    },
+    }),
     -- mapping = cmp.mapping.preset.insert({
     --  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     --  ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -82,8 +82,8 @@ cmp.setup({
     -- }),
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "vsnip" }, -- For vsnip users.
-        --{ name = 'luasnip' }, -- For luasnip users.
+        --{ name = "vsnip" }, -- For vsnip users.
+        { name = 'luasnip' }, -- For luasnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'snippy' }, -- For snippy users.
         { name = "path",    option = {} },
