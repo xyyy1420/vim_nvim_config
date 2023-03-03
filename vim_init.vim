@@ -16,14 +16,14 @@ set rtp+=~/.vim
 
 
 
-LoadScript init/init-plugins.vim
 LoadScript init/init-basic.vim
+LoadScript init/init-plugins.vim
 "LoadScript init/init-config.vim
 "LoadScript init/init-style.vim
 LoadScript init/init-keymaps.vim
 "LoadScript ./vim_test_plugin.vim
 
 
-echo " 凡我不能创造的，我就不能理解。 ——理查德·费曼 "
+echo " 凡我不能创造的，我才不能理解。 ——理查德·费曼 "
 
 
