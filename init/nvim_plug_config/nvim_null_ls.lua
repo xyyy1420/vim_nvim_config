@@ -12,7 +12,6 @@ null_ls.setup({
         formatting.astyle,
         formatting.autopep8,
         formatting.beautysh,
-        completion.vsnip,
         formatting.prettier.with({
             filetypes = { "go", "markdown", "rust", "c", "cpp", "python", "lua", "json" },
         }),
