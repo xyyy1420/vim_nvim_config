@@ -26,7 +26,7 @@ if !exists('g:bundle_group')
     let g:bundle_group+=['mason']
     let g:bundle_group+=['nvim_cmp']
     let g:bundle_group+=['null-ls']
-    let g:bundle_group+=['indent_blankline']
+"    let g:bundle_group+=['indent_blankline']
     let g:bundle_group+=['registers']
 
 "    let g:bundle_group+=['autopairs']
@@ -63,10 +63,10 @@ endif
 if index(g:bundle_group,'fzf')>=0
     Plug 'junegunn/fzf',{'do':{ -> fzf#install() }}
     Plug 'junegunn/fzf.vim'
-    Plug 'yuki-yano/fzf-preview.vim',{'branch':'release/rpc'}
+"    Plug 'yuki-yano/fzf-preview.vim',{'branch':'release/rpc'}
 
     "开启预览窗口
-    let g:fzf_preview_window = ['right,50%','ctrl-/']
+"    let g:fzf_preview_window = ['right,50%','ctrl-/']
     " Commands : -------------------------
     " Files
     " GFiles
@@ -126,9 +126,10 @@ endif
 if index(g:bundle_group,'treesitter')>=0
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-    set foldmethod=expr
-    set foldexpr=nvim_treesitter#foldexpr()
-    set nofoldenable
+    Plug 'yioneko/nvim-yati',{'tag':'*'}
+    "set foldmethod=expr
+    "set foldexpr=nvim_treesitter#foldexpr()
+    "set nofoldenable
 endif
 
 "一个高度可扩展的列表模糊查找器，配置文件 telescope.lua
@@ -148,18 +149,7 @@ if index(g:bundle_group,'telescope')>=0
     nnoremap <leader>ft <cmd>Telescope help_tags<cr>
     nnoremap <leader>fz <cmd>Telescope zoxide list<cr>
 
-    "与coc联动的插件，主要用于代码导航
-    if index(g:bundle_group,'coc')>=0
-        Plug 'fannheyward/telescope-coc.nvim'
-        nmap <silent> <leader>gm :Telescope coc mru<CR>
-        nmap <silent> <leader>gl :Telescope coc locations<CR>
-        nmap <silent> <leader>gr :Telescope coc references<CR>
-        nmap <silent> <leader>gd :Telescope coc definitions<CR>
-    "    nmap <silent> <leader>gd :Telescope coc declarations<CR>
-        nmap <silent> <leader>gi :Telescope coc implementations<CR>
-        nmap <silent> <leader>gt :Telescope coc type_definitions<CR>
-    endif
-
+   
     "与zoxide联动的插件，主要提供对zoxide数据库搜索功能 快捷键leader fz
     Plug 'jvgrootveld/telescope-zoxide'
 
@@ -227,12 +217,12 @@ if index(g:bundle_group,'nvim_cmp')>=0
     Plug 'hrsh7th/nvim-cmp'
 
     " For vsnip users.
-    Plug 'hrsh7th/cmp-vsnip'
-    Plug 'hrsh7th/vim-vsnip'
+    "Plug 'hrsh7th/cmp-vsnip'
+    "Plug 'hrsh7th/vim-vsnip'
 
     " For luasnip users.
-    "Plug 'L3MON4D3/LuaSnip'
-    "Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
 
     " For ultisnips users.
     "Plug 'SirVer/ultisnips'
@@ -268,6 +258,8 @@ call plug#end()
 
 if index(g:bundle_group,'treesitter')>=0
     source ~/jxy_vim/init/nvim_plug_config/treesitter.lua
+    source ~/jxy_vim/init/nvim_plug_config/treesitter_yati.lua
+
 endif
 
 if index(g:bundle_group,'color')>=0
