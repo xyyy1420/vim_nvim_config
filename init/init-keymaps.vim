@@ -118,9 +118,12 @@ nnoremap <C-k> <C-o>
 
 
 "每次搜索跳转的时候都将光标处放置在窗口中央
-noremap n nzz
-noremap N Nzz
+nnoremap n nzz
+nnoremap N Nzz
 
 "使用Ctrl w +/-的组合键位，来实现上下分屏时的大小
 noremap <c-w>+ :res +5<CR>
 noremap <c-w>- :res -5<CR>
+
+"unmap n
+"unmap N
