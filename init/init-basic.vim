@@ -134,11 +134,14 @@ endif
 
 if has('syntax')
     "显示括号匹配
-    set showmatch
+"    set showmatch
     " 高亮搜索内容
     set hlsearch
-    syntax enable
-    syntax on
+    "if !exists("g:syntax_on")
+    "    syntax enable
+    "endif
+"    syntax enable
+"    syntax on
 
 endif
 
