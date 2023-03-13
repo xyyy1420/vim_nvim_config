@@ -80,7 +80,7 @@ set guifont=Sarasa_Mono_SC_Nerd:h14
 "hi Comment ctermfg=DarkCya
 
 set cursorline
-hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white
+"hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white
 
 " 设置光标位于屏幕上下10行距离，除非是上界和下界
 set scrolloff=10
