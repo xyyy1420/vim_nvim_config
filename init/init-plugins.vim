@@ -28,6 +28,7 @@ if !exists('g:bundle_group')
     let g:bundle_group+=['null-ls']
 "    let g:bundle_group+=['indent_blankline']
     let g:bundle_group+=['registers']
+    let g:bundle_group+=['startuptime']
 
 "    let g:bundle_group+=['autopairs']
 
@@ -55,6 +56,8 @@ if index(g:bundle_group,'basic')>=0
 
     " 注释
     Plug 'numToStr/Comment.nvim'
+
+    Plug 'lewis6991/impatient.nvim'
 endif
 
 "----------------------------------------------------------------------
@@ -247,6 +250,10 @@ endif
 
 if index(g:bundle_group,'registers')>=0
     Plug 'tversteeg/registers.nvim'
+endif
+
+if index(g:bundle_group,'startuptime')>=0
+    Plug 'dstein64/vim-startuptime'
 endif
 
 
