@@ -30,6 +30,9 @@ if !exists('g:bundle_group')
     let g:bundle_group+=['registers']
     let g:bundle_group+=['startuptime']
 
+    let g:bundle_group+=['cscope']
+    let g:bundle_group+=['neogen']
+
 "    let g:bundle_group+=['autopairs']
 
 endif
@@ -58,6 +61,11 @@ if index(g:bundle_group,'basic')>=0
     Plug 'numToStr/Comment.nvim'
 
     Plug 'lewis6991/impatient.nvim'
+
+    Plug 'mfulz/cscope.nvim'
+    let g:cscope_dir="~/.nvim_cscope"
+    let g:cscope_map_keys=0
+    let g:cscope_update_on_start=1
 endif
 
 "----------------------------------------------------------------------
@@ -257,6 +265,10 @@ if index(g:bundle_group,'startuptime')>=0
 endif
 
 
+if index(g:bundle_group,'neogen')>=0
+    Plug 'danymat/neogen'
+endif
+
 "Plug 'Wansmer/treesj'
 
 
@@ -325,6 +337,10 @@ endif
 
 if index(g:bundle_group,'registers')>=0
     source ~/jxy_vim/init/nvim_plug_config/nvim_registers.lua
+endif
+
+if index(g:bundle_group,'neogen')>=0
+    source ~/jxy_vim/init/nvim_plug_config/nvim_neogen.lua
 endif
 
 
