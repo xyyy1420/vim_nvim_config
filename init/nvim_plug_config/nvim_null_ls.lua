@@ -9,6 +9,7 @@ null_ls.setup({
     debug = false,
     sources = {
         diagnostics.markdownlint,
+        diagnostics.hadolint,
         formatting.astyle,
         formatting.autopep8,
         formatting.beautysh,

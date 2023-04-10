@@ -22,17 +22,18 @@ if !exists('g:bundle_group')
 "        let g:bundle_group += [ 'lspsaga' ]
 "        let g:bundle_group += [ 'task' ]
 
-"    let g:bundle_group+=['comment']
     let g:bundle_group+=['mason']
     let g:bundle_group+=['nvim_cmp']
     let g:bundle_group+=['null-ls']
-"    let g:bundle_group+=['indent_blankline']
+    let g:bundle_group+=['indent_blankline']
     let g:bundle_group+=['registers']
     let g:bundle_group+=['startuptime']
+   
 
     let g:bundle_group+=['cscope']
-    let g:bundle_group+=['neogen']
+"    let g:bundle_group+=['neogen']
 
+    let g:bundle_group+=['rnvimr']
 "    let g:bundle_group+=['autopairs']
 
 endif
@@ -267,6 +268,19 @@ endif
 
 if index(g:bundle_group,'neogen')>=0
     Plug 'danymat/neogen'
+endif
+
+if index(g:bundle_group,'navigator')>=0
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+    Plug 'ray-x/navigator.lua'
+    Plug 'nvim-treesitter/nvim-treesitter-refactor'
+
+endif
+
+if index(g:bundle_group, 'rnvimr')>=0
+    Plug 'kevinhwang91/rnvimr'
+    nnoremap <silent> <leader>rf :RnvimrToggle<CR>
 endif
 
 "Plug 'Wansmer/treesj'
