@@ -290,74 +290,74 @@ endif
 call plug#end()
 
 if index(g:bundle_group,'treesitter')>=0
-    source ~/jxy_vim/init/nvim_plug_config/treesitter.lua
-    source ~/jxy_vim/init/nvim_plug_config/treesitter_yati.lua
+    source $VIM_CONFIG/init/nvim_plug_config/treesitter.lua
+    source $VIM_CONFIG/init/nvim_plug_config/treesitter_yati.lua
 
 endif
 
 if index(g:bundle_group,'color')>=0
-    source ~/jxy_vim/init/nvim_plug_config/nightfox.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nightfox.lua
 endif
 
 if index(g:bundle_group,'telescope')>=0 
-    source ~/jxy_vim/init/nvim_plug_config/telescope.lua
+    source $VIM_CONFIG/init/nvim_plug_config/telescope.lua
 endif
 
 if index(g:bundle_group,'toggleterm')>=0 
-    source ~/jxy_vim/init/nvim_plug_config/toggleterm.lua
+    source $VIM_CONFIG/init/nvim_plug_config/toggleterm.lua
 endif
 
 if index(g:bundle_group,'task')>=0
-    source ~/jxy_vim/init/nvim_plug_config/toggletasks.lua
+    source $VIM_CONFIG/init/nvim_plug_config/toggletasks.lua
 endif
 
 if index(g:bundle_group,'comment')>=0
-    source ~/jxy_vim/init/nvim_plug_config/comment.lua
+    source $VIM_CONFIG/init/nvim_plug_config/comment.lua
 endif
 
 if index(g:bundle_group,'mason')>=0
-    source ~/jxy_vim/init/nvim_plug_config/nvim_mason.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nvim_mason.lua
 endif
 
 
 if index(g:bundle_group,'null-ls')>=0
-    source ~/jxy_vim/init/nvim_plug_config/nvim_mason_null.lua
-    source ~/jxy_vim/init/nvim_plug_config/nvim_null_ls.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nvim_mason_null.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nvim_null_ls.lua
 endif
 
 if index(g:bundle_group,'todo-comments')>=0
-    source ~/jxy_vim/init/nvim_plug_config/nvim_todo_comments.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nvim_todo_comments.lua
 endif   
 
 if index(g:bundle_group,'nvim_cmp')>=0
     set completeopt=menu,menuone,noselect
-    source ~/jxy_vim/init/nvim_plug_config/nvim_cmp.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nvim_cmp.lua
 endif   
 
 
 "TODO:配置leap移动
 if index(g:bundle_group,'basic')>=0
-    source ~/jxy_vim/init/nvim_plug_config/nvim_leap.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nvim_leap.lua
 endif
 
 if index(g:bundle_group,'indent_blankline')>=0
-    source ~/jxy_vim/init/nvim_plug_config/nvim_indent_blank.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nvim_indent_blank.lua
 endif
 
 if index(g:bundle_group,'autopairs')>=0
-    source ~/jxy_vim/init/nvim_plug_config/nvim_autopairs.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nvim_autopairs.lua
 endif
 
 
 if index(g:bundle_group,'registers')>=0
-    source ~/jxy_vim/init/nvim_plug_config/nvim_registers.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nvim_registers.lua
 endif
 
 if index(g:bundle_group,'neogen')>=0
-    source ~/jxy_vim/init/nvim_plug_config/nvim_neogen.lua
+    source $VIM_CONFIG/init/nvim_plug_config/nvim_neogen.lua
 endif
 
 
 " 配置编辑中，还没完成
-"     source ~/jxy_vim/init/treesj.lua
+"     source $VIM_CONFIG/init/treesj.lua
 
