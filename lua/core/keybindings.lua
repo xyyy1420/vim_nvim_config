@@ -1,7 +1,7 @@
 require "helpers/globals"
 require "helpers/keyboard"
 
-g.mapleader = ' '                                                                 -- Use Space, like key for alternative hotkeys
+g.mapleader = '\\'                                                                 -- Use Space, like key for alternative hotkeys
 
 -- LSP {{{
 nm('K', '<cmd>lua vim.lsp.buf.hover()<CR>' )                                      -- Hover object
@@ -28,8 +28,37 @@ nm('<leader>x', '<cmd>TroubleToggle<CR>')                                       
 nm('gr', '<cmd>Trouble lsp_references<CR>')                                       -- Show use of object in project
 -- }}}
 
--- Neo Tree {{{
-nm('<leader>v', '<cmd>NeoTreeFocusToggle<CR>')                                        -- Toggle file explorer
+-- insert mode set Emacs {{{
+im('<C-a>','<home>')
+im('<C-e>','<end>')
+im('<C-d>','<del>')
+im('<C-_>','<C-k>')
 -- }}}
+
+-- CTRL+HJKL -> l d u r{{{
+nm('<C-h>','<left>')
+nm('<C-j>','<down>')
+nm('<C-k>','<up>')
+nm('<C-l>','<right>')
+im('<C-h>','<left>')
+im('<C-j>','<down>')
+im('<C-k>','<up>')
+im('<C-l>','<right>')
+-- }}}
+
+
+-- leader tabe{{{
+nm('<leader>1','<esc>1gt<cr>')
+nm('<leader>2','<esc>2gt<cr>')
+nm('<leader>3','<esc>3gt<cr>')
+nm('<leader>4','<esc>4gt<cr>')
+nm('<leader>5','<esc>5gt<cr>')
+nm('<leader>6','<esc>6gt<cr>')
+nm('<leader>7','<esc>7gt<cr>')
+nm('<leader>8','<esc>8gt<cr>')
+nm('<leader>9','<esc>9gt<cr>')
+nm('<leader>0','<esc>10gt<cr>')
+--}}}
+
 
 -- vim:tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=0 foldlevel=0

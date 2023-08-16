@@ -21,20 +21,6 @@ return {
   },
   -- }}}
 
-  -- Neo Tree {{{
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-    config = function()
-      require "plugins.neotree"
-    end
-  },
-  -- }}}
-
   -- Telescope {{{
   {
     'nvim-telescope/telescope.nvim',
@@ -50,35 +36,35 @@ return {
   },
   -- }}}
 
-  -- CMP {{{
-  {
-    'hrsh7th/nvim-cmp',
-    event = "InsertEnter",
-    dependencies = {
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-emoji',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-nvim-lua',
-      'rafamadriz/friendly-snippets',
-    },
-    config = function()
-      require "plugins.cmp"
-    end
-  },
-  -- }}}
-
-  -- LSP Kind {{{
-  {
-    'onsails/lspkind-nvim',
-    lazy = true,
-    config = function()
-      require "plugins.lspkind"
-    end
-  },
-  -- }}}
+-- -- CMP {{{
+-- {
+--   'hrsh7th/nvim-cmp',
+--   event = "InsertEnter",
+--   dependencies = {
+--     {
+--       'L3MON4D3/LuaSnip',
+--       delete_check_events="TextChanged"
+--     },
+--     'saadparwaiz1/cmp_luasnip',
+--
+--     'hrsh7th/cmp-nvim-lsp',
+--
+--     'hrsh7th/cmp-path',
+--     'hrsh7th/cmp-emoji',
+--     'hrsh7th/cmp-nvim-lsp-signature-help',
+--     'hrsh7th/cmp-nvim-lua',
+--     'rafamadriz/friendly-snippets',
+--     'ray-x/cmp-treesitter',
+--
+--     'neovim/nvim-lspconfig',
+--
+--     'lukas-reineke/cmp-under-comparator'
+--   },
+--   config = function()
+--     require "plugins.cmp"
+--   end
+-- },
+-- -- }}}
 
   -- Git Signs{{{
   {
@@ -94,7 +80,7 @@ return {
   {
     "folke/trouble.nvim",
     lazy = true,
-    dependencies = "kyazdani42/nvim-web-devicons",
+    dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require "plugins.trouble"
     end,
@@ -107,11 +93,28 @@ return {
     lazy = false,
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
-    config = function()
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        init = function ()
+          require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
+          load_textobjects = true
+        end,
+      }
+    },
+    opts = function()
       require "plugins.treesitter"
     end
   },
   -- }}}
+
+-- Nvim-various-textobjs {{{
+  {
+    "chrisgrieser/nvim-various-textobjs",
+    lazy = false,
+    opts = { useDefaultKeymaps = true },
+  },
+-- }}}
 
   -- Theme: Sonokai {{{
   {
@@ -130,32 +133,28 @@ return {
  --  },
   -- }}}
 
-  -- Syntax-tree-surfer{{{
-  {
-  "ziontee113/syntax-tree-surfer"
-  },
-  -- }}}
-
   -- Wilder{{{
   {
-  "gelguy/wilder.nvim"
+  "gelguy/wilder.nvim",
+  event='CmdlineEnter',
+  dependencies = {
+    'roxma/nvim-yarp',
+    'roxma/vim-hug-neovim-rpc'
+  },
+  config=function ()
+    require "plugins.wilder"
+  end
   },
   -- }}}
 
   -- toggleterm{{{
   {
-  'akinsho/toggleterm.nvim', version = "*", config = true
-  },
-  -- or
-  --  {'akinsho/toggleterm.nvim', version = "*", opts = {--[[ things you want to change go here]]}},
-  -- }}}
-
- -- nvim-navic {{{
-  {
-    "SmiteshP/nvim-navic",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-    },
+    'akinsho/toggleterm.nvim', 
+    version = "*", 
+    config = true,
+    opts=function ()
+      require 'plugins.toggleterm'
+    end
   },
   -- }}}
 
@@ -182,6 +181,48 @@ return {
     end,
 
  },
+  -- }}}
+
+  -- oil {{{
+
+  {
+    'stevearc/oil.nvim',
+    opts = function ()
+      require "plugins.oil"
+    end,
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  -- }}}
+
+ -- symbols-outline {{{
+  {
+    "simrat39/symbols-outline.nvim",
+    opts = function ()
+      require "plugins.symbols-outline"
+    end
+  },
+  -- }}}
+
+ -- coq {{{
+  {
+    'ms-jpq/coq_nvim',branch= 'coq',
+    dependencies={
+      {'ms-jpq/coq.artifacts', branch='artifacts'},
+      {'ms-jpq/coq.thirdparty', branch= '3p'},
+      "neovim/nvim-lspconfig"
+    },
+  },
+ -- }}}
+
+ -- Distant {{{
+    {
+      'chipsenkbeil/distant.nvim',
+      branch = 'v0.3',
+      config = function()
+        require('distant'):setup()
+      end
+    }
   -- }}}
 
 }

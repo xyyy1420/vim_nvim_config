@@ -26,6 +26,7 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     -- Enabling highlight for all files
     enable = true,
+    additional_vim_regex_highlighting = false,
     disable = {},
   },
 
@@ -33,5 +34,5 @@ require'nvim-treesitter.configs'.setup {
     -- Disabling indentation for all files
     enable = false,
     disable = {},
-  }
+  },
 }

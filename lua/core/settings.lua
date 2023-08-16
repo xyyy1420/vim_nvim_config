@@ -73,8 +73,46 @@ end
 -- }}}
 
 -- customs {{{
-g.loaded_matchparen = 1
--- opt.noshowmatch = true
+g.loaded_matchparen = 2
+
+o.noshowmatch = true
 -- }}}
+
+-- Timings {{{
+
+o.updatetime = 1000
+o.timeout = true
+o.timeoutlen = 500
+o.ttimeoutlen = 10
+
+-- }}}
+
+-- display {{{
+o.list=true
+--总是显示状态栏
+o.laststatus=2
+--设置命令行高度为2
+o.cmdheight=1
+--设置显示行号
+o.number=true
+--总是显示标签栏
+o.showtabline=2
+--右下角显示命令
+o.showcmd=true
+--显示当前行行号
+o.ruler=true
+--设置终端256色
+o.t_Co=256
+
+
+
+  
+--}}}
+
+-- Encode {{{
+o.fileencoding="utf-8"
+o.encoding="utf-8"
+o.termencoding="utf-8"
+--}}}
 
 -- vim: tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=1

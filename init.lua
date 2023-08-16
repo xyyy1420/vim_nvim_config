@@ -14,6 +14,9 @@ local lazy = require("lazy")
 local opt={
   install={missing=true,}
 }
+
+require("plugins.coq")
+
 lazy.setup("core.plugins",opt)
 -- }}}
 
