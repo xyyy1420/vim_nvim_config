@@ -79,7 +79,6 @@ return {
   -- Trouble {{{
   {
     "folke/trouble.nvim",
-    lazy = true,
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require "plugins.trouble"
@@ -164,6 +163,9 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    opts=function ()
+      require('plugins.harpoon')
+    end
   },
   -- }}}
 
@@ -222,7 +224,13 @@ return {
       config = function()
         require('distant'):setup()
       end
-    }
+    },
+  -- }}}
+
+  -- Neoformat {{{
+    {
+      'sbdchd/neoformat',
+    },
   -- }}}
 
 }
