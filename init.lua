@@ -9,6 +9,7 @@ require "lazy-bootstrap"
 require "core.settings"
 require "core.keybindings"
 
+
 -- Plugin management {{{
 local lazy = require("lazy")
 local opt={

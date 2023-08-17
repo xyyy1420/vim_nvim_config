@@ -118,7 +118,7 @@ return {
   -- Theme: Sonokai {{{
   {
     "sainnhe/sonokai",
-    lazy = false,
+    lazy = true,
     config = function()
       require "plugins.colorscheme.sonokai"
     end
@@ -232,6 +232,28 @@ return {
       'sbdchd/neoformat',
     },
   -- }}}
+
+-- Tmux {{{
+  {
+    'aserowy/tmux.nvim',
+    configs=function ()
+      require 'plugins.tmux'
+    end
+  },
+
+--}}}
+
+-- Material {{{
+  {
+    "marko-cerovac/material.nvim" ,
+    opts=function ()
+      require "plugins.material"
+    end
+
+  },
+
+--}}}
+
 
 }
 
