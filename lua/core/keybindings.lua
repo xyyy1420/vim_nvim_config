@@ -12,7 +12,7 @@ nm('gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')                              
 
 -- Telescope {{{
 nm('gd', '<cmd>Telescope lsp_definitions<CR>')                            -- Goto declaration
-nm('<leader>p', '<cmd>Telescope oldfiles<CR>')                                   -- Show recent files
+nm('<leader>p', '<cmd>Telescope old-files<CR>')                                   -- Show recent files
 nm('<leader>O', '<cmd>Telescope git_files<CR>')                                  -- Search for a file in project
 nm('<leader>o', '<cmd>Telescope find_files<CR>')                                 -- Search for a file (ignoring git-ignore)
 nm('<leader>i', '<cmd>Telescope jumplist<CR>')                                   -- Show jumplist (previous locations)

@@ -36,6 +36,13 @@ return {
   },
   -- }}}
 
+  -- fzf-native {{{
+   {
+     'nvim-telescope/telescope-fzf-native.nvim',
+     build = 'make'
+   },
+  --}}}
+
 -- -- CMP {{{
 -- {
 --   'hrsh7th/nvim-cmp',
