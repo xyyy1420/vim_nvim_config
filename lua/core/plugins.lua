@@ -50,7 +50,10 @@ return {
    dependencies = {
      {
        'L3MON4D3/LuaSnip',
-       delete_check_events="TextChanged"
+       delete_check_events="TextChanged",
+       config=function ()
+          require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
+        end
      },
      'saadparwaiz1/cmp_luasnip',
 
