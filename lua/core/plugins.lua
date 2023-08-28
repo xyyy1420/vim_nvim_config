@@ -43,35 +43,37 @@ return {
    },
   --}}}
 
--- -- CMP {{{
--- {
---   'hrsh7th/nvim-cmp',
---   event = "InsertEnter",
---   dependencies = {
---     {
---       'L3MON4D3/LuaSnip',
---       delete_check_events="TextChanged"
---     },
---     'saadparwaiz1/cmp_luasnip',
---
---     'hrsh7th/cmp-nvim-lsp',
---
---     'hrsh7th/cmp-path',
---     'hrsh7th/cmp-emoji',
---     'hrsh7th/cmp-nvim-lsp-signature-help',
---     'hrsh7th/cmp-nvim-lua',
---     'rafamadriz/friendly-snippets',
---     'ray-x/cmp-treesitter',
---
---     'neovim/nvim-lspconfig',
---
---     'lukas-reineke/cmp-under-comparator'
---   },
---   config = function()
---     require "plugins.cmp"
---   end
--- },
--- -- }}}
+ -- CMP {{{
+ {
+   'hrsh7th/nvim-cmp',
+   event = "InsertEnter",
+   dependencies = {
+     {
+       'L3MON4D3/LuaSnip',
+       delete_check_events="TextChanged"
+     },
+     'saadparwaiz1/cmp_luasnip',
+
+     'hrsh7th/cmp-nvim-lsp',
+
+     'hrsh7th/cmp-path',
+     'hrsh7th/cmp-emoji',
+     'hrsh7th/cmp-nvim-lsp-signature-help',
+     'hrsh7th/cmp-nvim-lua',
+     'rafamadriz/friendly-snippets',
+     'ray-x/cmp-treesitter',
+
+     'amarakon/nvim-cmp-buffer-lines',
+
+     'neovim/nvim-lspconfig',
+
+     'lukas-reineke/cmp-under-comparator'
+   },
+   config = function()
+     require "plugins.cmp"
+   end
+ },
+ -- }}}
 
   -- Git Signs{{{
   {
@@ -214,14 +216,14 @@ return {
   -- }}}
 
  -- coq {{{
-  {
-    'ms-jpq/coq_nvim',branch= 'coq',
-    dependencies={
-      {'ms-jpq/coq.artifacts', branch='artifacts'},
-      {'ms-jpq/coq.thirdparty', branch= '3p'},
-      "neovim/nvim-lspconfig"
-    },
-  },
+ --  {
+ --    'ms-jpq/coq_nvim',branch= 'coq',
+ --    dependencies={
+ --      {'ms-jpq/coq.artifacts', branch='artifacts'},
+ --      {'ms-jpq/coq.thirdparty', branch= '3p'},
+ --      "neovim/nvim-lspconfig"
+ --    },
+ --  },
  -- }}}
 
  -- Distant {{{
@@ -241,6 +243,7 @@ return {
   -- }}}
 
 -- Tmux {{{
+-- set keybinding in tmux and nvim
   {
     'aserowy/tmux.nvim',
     configs=function ()
