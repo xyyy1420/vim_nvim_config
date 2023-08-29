@@ -143,7 +143,7 @@ return {
   -- Theme: Sonokai {{{
   {
     "sainnhe/sonokai",
-    lazy = true,
+    lazy = false,
     config = function()
       require "plugins.colorscheme.sonokai"
     end
@@ -157,19 +157,19 @@ return {
  --  },
   -- }}}
 
-  -- Wilder{{{
-  {
-  "gelguy/wilder.nvim",
-  event='CmdlineEnter',
-  dependencies = {
-    'roxma/nvim-yarp',
-    'roxma/vim-hug-neovim-rpc'
-  },
-  config=function ()
-    require "plugins.wilder"
-  end
-  },
-  -- }}}
+--  -- Wilder{{{
+--  {
+--  "gelguy/wilder.nvim",
+--  event='CmdlineEnter',
+--  dependencies = {
+--    'roxma/nvim-yarp',
+--    'roxma/vim-hug-neovim-rpc'
+--  },
+--  config=function ()
+--    require "plugins.wilder"
+--  end
+--  },
+--  -- }}}
 
   -- toggleterm{{{
   {
@@ -214,6 +214,7 @@ return {
 
   {
     'stevearc/oil.nvim',
+    lazy=true,
     opts = function ()
       require "plugins.oil"
     end,
@@ -269,18 +270,18 @@ return {
 
 --}}}
 
--- Material {{{
-  {
-    "marko-cerovac/material.nvim" ,
-    opts=function ()
-      require "plugins.material"
-    end
-
-  },
-
+---- Material {{{
+--  {
+--    "marko-cerovac/material.nvim" ,
+--    opts=function ()
+--      require "plugins.material"
+--    end
+--
+--  },
+--
 --}}}
 
--- Material {{{
+-- guess-indent {{{
   {
     "nmac427/guess-indent.nvim" ,
     opts=function ()
@@ -290,7 +291,6 @@ return {
   },
 
 --}}}
-
 
 }
 
