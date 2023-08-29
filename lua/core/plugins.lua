@@ -143,9 +143,19 @@ return {
   -- Theme: Sonokai {{{
   {
     "sainnhe/sonokai",
-    lazy = false,
+    lazy = true,
     config = function()
       require "plugins.colorscheme.sonokai"
+    end
+  },
+  -- }}}
+
+  -- Theme: gruvbox_baby {{{
+  {
+    "luisiacc/gruvbox-baby",
+    lazy = false,
+    config = function()
+      require "plugins.colorscheme.gruvbox_baby"
     end
   },
   -- }}}
