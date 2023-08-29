@@ -2,7 +2,8 @@
   File: mason.lua
   Description: Mason plugin configuration (with lspconfig)
   See: https://github.com/williamboman/mason.nvim
-]] local mason = require("mason")
+-- ]]
+local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 

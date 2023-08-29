@@ -7,10 +7,18 @@
 require "helpers/globals"
 
 return {
+  -- startuptime{{{
+  {
+    'dstein64/vim-startuptime',
+    lazy = false,
+  },
+  --}}}
+
   -- Mason {{{
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
+    lazy = true,
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
