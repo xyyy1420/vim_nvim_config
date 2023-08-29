@@ -14,14 +14,14 @@ return {
   },
   --}}}
 
-  -- filetype{{{
-  {
-    "nathom/filetype.nvim",
-    config = function()
-      require "plugins.filetype"
-    end
-  },
-  --}}}
+--  -- filetype{{{
+--  {
+--    "nathom/filetype.nvim",
+--    config = function()
+--      require "plugins.filetype"
+--    end
+--  },
+--  --}}}
 
   -- Mason {{{
   {
