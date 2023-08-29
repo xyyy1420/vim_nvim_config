@@ -21,11 +21,12 @@ cmp.setup {
 
     preselect = require('cmp').PreselectMode.None,
     complete = {
-        completeopt=menu,menuone,noinsert,noselect
+        completeopt=menu,menuone,noinsert,noselect,
+        autocomplete=false,
     },
+
     -- Mappings for cmp
     mapping = {
-
         -- Autocompletion menu
         -- ['<C-y>'] = cmp.mapping(cmp.mapping.complete(), {'i'}),
         ['<C-y>'] = cmp.config.disable,

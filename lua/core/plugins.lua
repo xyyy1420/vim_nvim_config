@@ -280,6 +280,17 @@ return {
 
 --}}}
 
+-- Material {{{
+  {
+    "nmac427/guess-indent.nvim" ,
+    opts=function ()
+      require "plugins.guess-indent"
+    end
+
+  },
+
+--}}}
+
 
 }
 
