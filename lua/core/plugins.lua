@@ -9,8 +9,17 @@ require "helpers/globals"
 return {
   -- startuptime{{{
   {
-    'dstein64/vim-startuptime',
+    'tweekmonster/startuptime.vim',
     lazy = false,
+  },
+  --}}}
+
+  -- filetype{{{
+  {
+    "nathom/filetype.nvim",
+    config = function()
+      require "plugins.filetype"
+    end
   },
   --}}}
 
@@ -18,7 +27,6 @@ return {
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
-    lazy = true,
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
@@ -68,13 +76,10 @@ return {
      'hrsh7th/cmp-nvim-lsp',
 
      'hrsh7th/cmp-path',
-     'hrsh7th/cmp-emoji',
      'hrsh7th/cmp-nvim-lsp-signature-help',
      'hrsh7th/cmp-nvim-lua',
      'rafamadriz/friendly-snippets',
      'ray-x/cmp-treesitter',
-
-     'amarakon/nvim-cmp-buffer-lines',
 
      'neovim/nvim-lspconfig',
 

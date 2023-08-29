@@ -2,19 +2,16 @@
   File: cmp.lua
   Description: CMP plugin configuration (with lspconfig)
   See: https://github.com/hrsh7th/nvim-cmp
-]] local has_words_before = function()
-    unpack = unpack or table.unpack
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and
-               vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col,
-                                                                          col)
-                   :match("%s") == nil
-end
+]] 
 
+local has_words_before = function()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
-
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -22,6 +19,10 @@ cmp.setup {
         end
     },
 
+    preselect = require('cmp').PreselectMode.None,
+    complete = {
+        completeopt=menu,menuone,noinsert,noselect
+    },
     -- Mappings for cmp
     mapping = {
 
@@ -55,6 +56,7 @@ cmp.setup {
             i = cmp.mapping.abort(), -- Abort completion
             c = cmp.mapping.close() -- Close completion window
         }),
+  
         ['<C-p>'] = cmp.mapping.disable,
         ['<C-n>'] = cmp.mapping.disable,
         -- Use <C-p> and <C-n> to navigate through completion variants
@@ -65,7 +67,7 @@ cmp.setup {
 
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                cmp.select_next_item({behavior = cmp.SelectBehavior.Insert})
+                cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jumpable()
             elseif has_words_before() then
@@ -106,12 +108,11 @@ cmp.setup {
     },
 
     sources = cmp.config.sources({
-        {name = 'treesitter'}, -- Treesitter
-        {name = 'buffer-lines'}, -- buffer line
+        {name = 'luasnip'}, -- Luasnip
         {name = 'nvim_lsp'}, -- LSP
         {name = 'nvim_lsp_signature_help'}, -- LSP for parameters in functions
+        {name = 'treesitter'}, -- Treesitter
         {name = 'nvim_lua'}, -- Lua Neovim API
-        {name = 'luasnip'}, -- Luasnip
         {name = 'buffer',keyword_length=10}, -- Buffers
         {name = 'path'}, -- Paths
    }, {}),
