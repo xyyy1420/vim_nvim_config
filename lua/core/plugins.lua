@@ -242,17 +242,6 @@ return {
   },
   -- }}}
 
- -- coq {{{
- --  {
- --    'ms-jpq/coq_nvim',branch= 'coq',
- --    dependencies={
- --      {'ms-jpq/coq.artifacts', branch='artifacts'},
- --      {'ms-jpq/coq.thirdparty', branch= '3p'},
- --      "neovim/nvim-lspconfig"
- --    },
- --  },
- -- }}}
-
  -- Distant {{{
     {
       'chipsenkbeil/distant.nvim',
@@ -278,17 +267,6 @@ return {
     end
   },
 
---}}}
-
----- Material {{{
---  {
---    "marko-cerovac/material.nvim" ,
---    opts=function ()
---      require "plugins.material"
---    end
---
---  },
---
 --}}}
 
 -- guess-indent {{{
