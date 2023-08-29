@@ -5,4 +5,4 @@ fn = vim.fn;   -- Vim function
 g = vim.g;     -- Vim globals
 opt = vim.opt; -- Vim optionals
 o=vim.o       -- global option
-theme= 'gruvbox-baby'
+theme= 'sonokai'

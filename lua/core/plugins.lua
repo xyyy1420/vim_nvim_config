@@ -7,25 +7,17 @@
 require "helpers/globals"
 
 return {
-  -- startuptime{{{
+  -- Startuptime{{{
   {
     'tweekmonster/startuptime.vim',
-    lazy = false,
+    lazy = true,
   },
   --}}}
-
---  -- filetype{{{
---  {
---    "nathom/filetype.nvim",
---    config = function()
---      require "plugins.filetype"
---    end
---  },
---  --}}}
 
   -- Mason {{{
   {
     "williamboman/mason.nvim",
+    lazy=false,
     build = ":MasonUpdate",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
@@ -52,10 +44,16 @@ return {
   },
   -- }}}
 
-  -- fzf-native {{{
+  -- Telescope fzf-native {{{
    {
-     'nvim-telescope/telescope-fzf-native.nvim',
-     build = 'make'
+      "telescope.nvim",
+      dependencies={
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+        config=function()
+          require("telescope").load_extension("fzf")
+        end
+      }
    },
   --}}}
 
@@ -104,6 +102,7 @@ return {
   -- Trouble {{{
   {
     "folke/trouble.nvim",
+    lazy=false,
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require "plugins.trouble"
@@ -143,20 +142,21 @@ return {
   -- Theme: Sonokai {{{
   {
     "sainnhe/sonokai",
-    lazy = true,
+    lazy = false,
     config = function()
       require "plugins.colorscheme.sonokai"
     end
   },
   -- }}}
 
-  -- Theme: gruvbox_baby {{{
+  -- Theme: gruvbox {{{
   {
-    "luisiacc/gruvbox-baby",
+    "ellisonleao/gruvbox.nvim",
     lazy = false,
-    config = function()
-      require "plugins.colorscheme.gruvbox_baby"
-    end
+    priority=1000,
+--    config = function()
+--      require "plugins.colorscheme.sonokai"
+--    end
   },
   -- }}}
 
@@ -166,20 +166,6 @@ return {
  --  opts = {}
  --  },
   -- }}}
-
---  -- Wilder{{{
---  {
---  "gelguy/wilder.nvim",
---  event='CmdlineEnter',
---  dependencies = {
---    'roxma/nvim-yarp',
---    'roxma/vim-hug-neovim-rpc'
---  },
---  config=function ()
---    require "plugins.wilder"
---  end
---  },
---  -- }}}
 
   -- toggleterm{{{
   {
@@ -269,7 +255,7 @@ return {
 
 --}}}
 
--- guess-indent {{{
+-- Guess-indent {{{
   {
     "nmac427/guess-indent.nvim" ,
     opts=function ()
@@ -281,6 +267,5 @@ return {
 --}}}
 
 }
-
 
 -- vim:tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=0 foldlevel=0
