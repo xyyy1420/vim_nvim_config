@@ -149,14 +149,31 @@ return {
   },
   -- }}}
 
-  -- Theme: gruvbox {{{
+  -- Theme: lush {{{
   {
-    "ellisonleao/gruvbox.nvim",
+    "rktjmp/lush.nvim",
     lazy = false,
     priority=1000,
---    config = function()
---      require "plugins.colorscheme.sonokai"
---    end
+    config = function()
+      require "plugins.colorscheme.lush"
+    end
+  },
+  -- }}}
+
+  -- Theme: kanagawa {{{
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority=1000,
+    config = function()
+      require "plugins.colorscheme.kanagawa"
+    end
+  },
+  -- }}}
+
+  -- Theme: nord {{{
+  { 
+    'shaunsingh/nord.nvim',
   },
   -- }}}
 
