@@ -160,17 +160,6 @@ return {
   },
   -- }}}
 
-  -- Theme: kanagawa {{{
-  {
-    "rebelot/kanagawa.nvim",
-    lazy = false,
-    priority=1000,
-    config = function()
-      require "plugins.colorscheme.kanagawa"
-    end
-  },
-  -- }}}
-
   -- Theme: nord {{{
   { 
     'shaunsingh/nord.nvim',
