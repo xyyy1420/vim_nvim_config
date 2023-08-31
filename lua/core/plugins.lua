@@ -166,6 +166,15 @@ return {
   },
   -- }}}
 
+  -- Theme: onedark {{{
+  { 
+    'navarasu/onedark.nvim',
+    config = function()
+      require "plugins.colorscheme.onedark"
+    end
+  },
+  -- }}}
+
   -- Hardtime{{{
  --  {
  --  "m4xshen/hardtime.nvim",
