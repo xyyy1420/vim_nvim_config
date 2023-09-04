@@ -83,7 +83,7 @@ return {
 
      'lukas-reineke/cmp-under-comparator'
    },
-   config = function()
+   opts = function()
      require "plugins.cmp"
    end
  },
@@ -157,12 +157,6 @@ return {
     config = function()
       require "plugins.colorscheme.lush"
     end
-  },
-  -- }}}
-
-  -- Theme: nord {{{
-  { 
-    'shaunsingh/nord.nvim',
   },
   -- }}}
 
