@@ -110,13 +110,33 @@ cmp.setup {
     sources = cmp.config.sources({
         {name = 'luasnip'}, -- Luasnip
         {name = 'nvim_lsp'}, -- LSP
+        {name = 'spell',
+            option={
+                keep_all_entries=false,
+                enable_in_context=function ()
+                    return true
+                end
+            }
+        }, -- Spell
         {name = 'nvim_lsp_signature_help'}, -- LSP for parameters in functions
         {name = 'treesitter'}, -- Treesitter
         {name = 'nvim_lua'}, -- Lua Neovim API
         {name = 'buffer',keyword_length=10}, -- Buffers
         {name = 'path'}, -- Paths
    }, {}),
-  
+
+    sorting={
+        comparators={
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            require "cmp-under-comparator".under,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+        }
+    }
 
 }
 

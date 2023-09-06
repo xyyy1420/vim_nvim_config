@@ -78,6 +78,7 @@ return {
      'hrsh7th/cmp-nvim-lua',
      'rafamadriz/friendly-snippets',
      'ray-x/cmp-treesitter',
+     'f3fora/cmp-spell',
 
      'neovim/nvim-lspconfig',
 
@@ -88,6 +89,18 @@ return {
    end
  },
  -- }}}
+
+  -- Cmp choise{{{
+  {
+    'doxnit/cmp-luasnip-choice',
+    lazy = false,
+    config = function()
+      require('cmp_luasnip_choice').setup({
+        auto_open=true,
+      });
+    end
+  },
+  -- }}}
 
   -- Git Signs{{{
   {
@@ -287,6 +300,23 @@ return {
 
   },
 
+--}}}
+
+-- Lspsaga {{{
+ {
+    'nvimdev/lspsaga.nvim',
+    config = function()
+        require('lspsaga').setup({
+          symbol_in_winbar={
+            enable=false,
+          }
+        })
+    end,
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter', -- optional
+        'nvim-tree/nvim-web-devicons'     -- optional
+    }
+  }
 --}}}
 
 
