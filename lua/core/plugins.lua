@@ -83,7 +83,7 @@ return {
 
      'lukas-reineke/cmp-under-comparator'
    },
-   config = function()
+   opts = function()
      require "plugins.cmp"
    end
  },
