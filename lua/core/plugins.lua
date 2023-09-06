@@ -160,12 +160,6 @@ return {
   },
   -- }}}
 
-  -- Theme: nord {{{
-  { 
-    'shaunsingh/nord.nvim',
-  },
-  -- }}}
-
   -- Theme: onedark {{{
   { 
     'navarasu/onedark.nvim',
@@ -280,6 +274,21 @@ return {
   },
 
 --}}}
+
+-- Leap {{{
+  {
+    "ggandor/leap.nvim" ,
+    dependencies = {
+      "tpope/vim-repeat",
+    },
+    opts=function ()
+      require "plugins.leap"
+    end
+
+  },
+
+--}}}
+
 
 }
 
