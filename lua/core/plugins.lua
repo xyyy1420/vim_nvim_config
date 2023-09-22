@@ -305,6 +305,7 @@ return {
 -- Lspsaga {{{
  {
     'nvimdev/lspsaga.nvim',
+    lazy=true,
     config = function()
         require('lspsaga').setup({
           symbol_in_winbar={
