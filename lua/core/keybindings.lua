@@ -46,7 +46,6 @@ im('<C-k>','<up>')
 im('<C-l>','<right>')
 -- }}}
 
-
 -- leader tabe{{{
 nm('<leader>1','<esc>1gt<cr>')
 nm('<leader>2','<esc>2gt<cr>')
@@ -59,6 +58,8 @@ nm('<leader>8','<esc>8gt<cr>')
 nm('<leader>9','<esc>9gt<cr>')
 nm('<leader>0','<esc>10gt<cr>')
 --}}}
+
+vim.api.nvim_set_keymap('n','<leader>z',"<cmd>lua require'centerpad'.toggle{leftpad=120,rightpad=120}<cr>",{silent=true,noremap=true})
 
 
 -- vim:tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=0 foldlevel=0
