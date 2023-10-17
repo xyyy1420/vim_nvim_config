@@ -11,7 +11,12 @@ require'nvim-treesitter.configs'.setup {
     "python",
     "c",
     "rust",
-    "cpp"
+    "cpp",
+    "regex",
+    "json",
+    "yaml",
+    "vim",
+    "vimdoc"
   },
 
   -- Install all parsers synchronously

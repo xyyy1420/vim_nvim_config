@@ -9,6 +9,8 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
+vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 cmp.setup {
@@ -136,8 +138,12 @@ cmp.setup {
             cmp.config.compare.length,
             cmp.config.compare.order,
         }
-    }
-
+    },
+    experimental={
+        ghost_text={
+            hl_group="CmpGhostText",
+        },
+    },
 }
 
 -- Add snippets from Friendly Snippets
