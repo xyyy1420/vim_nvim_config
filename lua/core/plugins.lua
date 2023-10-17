@@ -367,22 +367,30 @@ return {
 
 --}}}
 
--- Lspsaga {{{
+---- Lspsaga {{{
+--{
+--  'nvimdev/lspsaga.nvim',
+--  config = function()
+--    require('lspsaga').setup({
+--      symbol_in_winbar={
+--        enable=false,
+--      }
+--    })
+--  end,
+--  dependencies = {
+--    'nvim-treesitter/nvim-treesitter', -- optional
+--    'nvim-tree/nvim-web-devicons'     -- optional
+--    }
+--},
+----}}}
+
+-- Centerpad {{{
 {
-  'nvimdev/lspsaga.nvim',
-  config = function()
-    require('lspsaga').setup({
-      symbol_in_winbar={
-        enable=false,
-      }
-    })
-  end,
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter', -- optional
-    'nvim-tree/nvim-web-devicons'     -- optional
-    }
-}
+  "smithbm2316/centerpad.nvim" ,
+},
+
 --}}}
+
 
 }
 
