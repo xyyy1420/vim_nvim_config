@@ -81,7 +81,7 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-nvim-lua',
     'ray-x/cmp-treesitter',
-    'f3fora/cmp-spell',
+--    'f3fora/cmp-spell',
 
     'neovim/nvim-lspconfig',
 
@@ -212,16 +212,6 @@ return {
 },
 -- }}}
 
--- Theme: lush {{{
-{
-  "rktjmp/lush.nvim",
-  priority=1000,
-  config = function()
-    require "plugins.colorscheme.lush"
-  end
-},
--- }}}
-
 -- Theme: onedark {{{
 { 
   'navarasu/onedark.nvim',
@@ -245,22 +235,6 @@ return {
   config = true,
   opts=function ()
     require 'plugins.toggleterm'
-  end
-},
--- }}}
-
--- harpoon {{{
-{
-  "ThePrimeagen/harpoon",
-  dependencies = {
-    {
-      "nvim-lua/plenary.nvim",
-      lazy = true,
-    },
-
-  },
-  opts=function ()
-    require('plugins.harpoon')
   end
 },
 -- }}}
@@ -301,16 +275,6 @@ return {
 },
 -- }}}
 
--- Distant {{{
-{
-  'chipsenkbeil/distant.nvim',
-  branch = 'v0.3',
-  config = function()
-    require('distant'):setup()
-  end
-},
--- }}}
-
 -- Neoformat {{{
 {
   'sbdchd/neoformat',
@@ -338,20 +302,7 @@ return {
 
 --}}}
 
----- Leap {{{
---{
---  "ggandor/leap.nvim" ,
---  dependencies = {
---    "tpope/vim-repeat",
---  },
---  opts=function ()
---    require "plugins.leap"
---  end
---},
---
-----}}}
-
--- Flash {{
+-- Flash {{{
 {
   "folke/flash.nvim",
   event = "VeryLazy",
@@ -364,15 +315,12 @@ return {
     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
   config = function ()
-    require "plugins.flash"
-    require("flash").toggle()
-
+    require "plugins.flash_config"
   end,
- 
 },
---}}
+--}}}
 
----- Lspsaga {{{
+--Lspsaga {{{
 --{
 --  'nvimdev/lspsaga.nvim',
 --  config = function()
@@ -396,7 +344,10 @@ return {
 
 --}}}
 
+-- surround {{{
+{
+  "tpope/vim-surround" ,
+}
+--}}}
 
 }
-
--- vim:tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=0 foldlevel=0

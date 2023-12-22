@@ -117,4 +117,5 @@ o.termencoding="utf-8"
 
 vim.opt.spell=true
 vim.opt.spelllang={'en_us'}
+vim.opt.scrolloff=8
 -- vim: tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=1

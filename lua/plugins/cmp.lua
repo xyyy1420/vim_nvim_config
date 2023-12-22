@@ -58,7 +58,6 @@ cmp.setup {
             i = cmp.mapping.abort(), -- Abort completion
             c = cmp.mapping.close() -- Close completion window
         }),
-  
         ['<C-p>'] = cmp.mapping.disable,
         ['<C-n>'] = cmp.mapping.disable,
         -- Use <C-p> and <C-n> to navigate through completion variants
@@ -110,16 +109,16 @@ cmp.setup {
     },
 
     sources = cmp.config.sources({
-        {name = 'luasnip'}, -- Luasnip
         {name = 'nvim_lsp'}, -- LSP
-        {name = 'spell',
-            option={
-                keep_all_entries=false,
-                enable_in_context=function ()
-                    return true
-                end
-            }
-        }, -- Spell
+        {name = 'luasnip'}, -- Luasnip
+--       {name = 'spell',
+--           option={
+--               keep_all_entries=false,
+--               enable_in_context=function ()
+--                   return true
+--               end
+--           }
+--       }, -- Spell
         {name = 'nvim_lsp_signature_help'}, -- LSP for parameters in functions
         {name = 'treesitter'}, -- Treesitter
         {name = 'nvim_lua'}, -- Lua Neovim API
