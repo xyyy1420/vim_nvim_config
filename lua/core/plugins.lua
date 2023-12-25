@@ -347,7 +347,48 @@ return {
 -- surround {{{
 {
   "tpope/vim-surround" ,
-}
+},
 --}}}
+
+-- activate {{{
+{
+  "roobert/activate.nvim",
+    keys={
+      {
+        "<leader>P",
+        '<CMD>lua require("activate").list_plugins()<CR>',
+        desc='Plugins',
+      },
+    },
+    dependencies={
+      {'nvim-telescope/telescope.nvim',dependencies = { 'nvim-lua/plenary.nvim' }}
+    }
+},
+--}}}
+
+---- activate {{{
+--{
+--  "samjwill/nvim-unception",
+--  init = function ()
+--    vim.g.unception_open_buffer_in_new_tab=true
+--  end
+--}
+----}}}
+
+
+
+{
+  "willothy/flatten.nvim",
+  config = true,
+  -- or pass configuration with
+  -- opts = {  }
+  -- Ensure that it runs first to minimize delay when opening file from terminal
+  lazy = false,
+  priority = 1001,
+},
+--- ...
+
+
+
 
 }
