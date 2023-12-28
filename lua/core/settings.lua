@@ -75,7 +75,7 @@ end
 -- customs {{{
 g.loaded_matchparen = 2
 
-o.noshowmatch = true
+--o.noshowmatch = true
 -- }}}
 
 -- Timings {{{
@@ -102,7 +102,7 @@ o.showcmd=true
 --显示当前行行号
 o.ruler=true
 --设置终端256色
-o.t_Co=256
+--o.t_Co=256
 
 
 
@@ -112,7 +112,7 @@ o.t_Co=256
 -- Encode {{{
 o.fileencoding="utf-8"
 o.encoding="utf-8"
-o.termencoding="utf-8"
+--o.termencoding="utf-8"
 --}}}
 
 vim.opt.spell=true

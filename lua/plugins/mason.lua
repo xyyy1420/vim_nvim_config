@@ -92,6 +92,7 @@ mason_lspconfig.setup({
 -- 
 -- Setup every needed language server in lspconfig
 
+--local capabilities = require("ddc_source_lsp").make_client_capabilities()
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local handlers = {
     function(server_name)
@@ -100,5 +101,7 @@ local handlers = {
     end
 }
 
+
 mason_lspconfig.setup_handlers(handlers)
+
 
