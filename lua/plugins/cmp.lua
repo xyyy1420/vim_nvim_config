@@ -51,8 +51,6 @@ cmp.setup {
             })
         }), -- Turn off autocomplete on <CR>
 
-        -- ['<C-y>'] = cmp.mapping.confirm({ select = true }), -- Turn on autocomplete on <C-y>
-
         -- Use <C-e> to abort autocomplete
         ['<C-e>'] = cmp.mapping({
             i = cmp.mapping.abort(), -- Abort completion
@@ -60,12 +58,6 @@ cmp.setup {
         }),
         ['<C-p>'] = cmp.mapping.disable,
         ['<C-n>'] = cmp.mapping.disable,
-        -- Use <C-p> and <C-n> to navigate through completion variants
-        -- ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-        -- ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-        -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i' ,'c'}),
-        -- ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i','c'}),
-
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
