@@ -27,33 +27,6 @@ return {
 },
 -- }}}
 
--- Telescope {{{
-{
-  'nvim-telescope/telescope.nvim',
-  tag = '0.1.1',
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "ahmedkhalf/project.nvim",
-  },
-  config = function()
-    require "plugins.telescope"
-  end
-},
--- }}}
-
--- Telescope fzf-native {{{
-{
-  "telescope.nvim",
-  dependencies={
-    'nvim-telescope/telescope-fzf-native.nvim',
-  build = 'make',
-  config=function()
-    require("telescope").load_extension("fzf")
-  end
-  }
-},
---}}}
-
 -- CMP {{{
 {
   'hrsh7th/nvim-cmp',
@@ -69,9 +42,9 @@ return {
         end,
       },
 
---      config=function ()
---        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
---      end
+      config=function ()
+        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
+      end
     },
     'saadparwaiz1/cmp_luasnip',
 
@@ -81,7 +54,6 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-nvim-lua',
     'ray-x/cmp-treesitter',
---    'f3fora/cmp-spell',
 
     'neovim/nvim-lspconfig',
 
@@ -101,94 +73,16 @@ return {
   end
 },
 -- }}}
---
----- Trouble {{{
---{
---  "folke/trouble.nvim",
---  dependencies = "nvim-tree/nvim-web-devicons",
---  config = function()
---    require "plugins.trouble"
---  end,
---},
----- }}}
 
--- TreeSitter config copy from lazyvim {{{
---{
---  "nvim-treesitter/nvim-treesitter",
---  build = ":TSUpdate",
---  event = { "BufReadPost", "BufNewFile" },
---  dependencies = {
---    {
---      "nvim-treesitter/nvim-treesitter-textobjects",
---      init = function ()
---        require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
---        load_textobjects = true
---      end,
---    }
---  },
---  opts = {
---    highlight = {
---      enable = true,
---        additional_vim_regex_highlighting = false,
---        use_languagetree=false,
---        disable = function(_,bufnr)
---          local buf_name = vim.api.nvim_buf_get_name(bufnr)
---          local file_size=vim.api.nvim_call_function("getfsize",{buf_name})
---          return file_size > 256*1024
---        end,
---    },
---    indent = { enable = true },
---    ensure_installed = {
---      "bash",
---      "c",
---      "json",
---      "lua",
---      "luadoc",
---      "luap",
---      "markdown",
---      "markdown_inline",
---      "python",
---      "query",
---      "regex",
---      "vim",
---      "vimdoc",
---      "yaml",
---    },
---    incremental_selection = {
---      enable = false,
---    },
---  },
---  config = function(_, opts)
---    if type(opts.ensure_installed) == "table" then
---      ---@type table<string, boolean>
---      local added = {}
---      opts.ensure_installed = vim.tbl_filter(function(lang)
---        if added[lang] then
---          return false
---        end
---        added[lang] = true
---        return true
---      end, opts.ensure_installed)
---    end
---    require("nvim-treesitter.configs").setup(opts)
---
---    if load_textobjects then
---      -- PERF: no need to load the plugin, if we only need its queries for mini.ai
---      if opts.textobjects then
---        for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
---          if opts.textobjects[mod] and opts.textobjects[mod].enable then
---            local Loader = require("lazy.core.loader")
---            Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
---            local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
---            require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
---            break
---          end
---        end
---      end
---    end
---  end,
---},
----- }}}
+-- Trouble {{{
+{
+  "folke/trouble.nvim",
+  dependencies = "nvim-tree/nvim-web-devicons",
+  config = function()
+    require "plugins.trouble"
+  end,
+},
+-- }}}
 
 -- Nvim-various-textobjs {{{
 {
@@ -269,16 +163,6 @@ return {
 
 --}}}
 
--- Guess-indent {{{
-{
-  "nmac427/guess-indent.nvim" ,
-  opts=function ()
-    require "plugins.guess-indent"
-  end
-},
-
---}}}
-
 -- Flash {{{
 {
   "folke/flash.nvim",
@@ -327,31 +211,6 @@ return {
 },
 --}}}
 
----- activate {{{
---{
---  "roobert/activate.nvim",
---    keys={
---      {
---        "<leader>P",
---        '<CMD>lua require("activate").list_plugins()<CR>',
---        desc='Plugins',
---      },
---    },
---    dependencies={
---      {'nvim-telescope/telescope.nvim',dependencies = { 'nvim-lua/plenary.nvim' }}
---    }
---},
-----}}}
---
----- activate {{{
---{
---  "samjwill/nvim-unception",
---  init = function ()
---    vim.g.unception_open_buffer_in_new_tab=true
---  end
---}
-----}}}
-
 {
   "willothy/flatten.nvim",
   config = true,
@@ -383,31 +242,27 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     -- calling `setup` is optional for customization
-    require("fzf-lua").setup({})
+    require("fzf-lua").setup({'fzf-native'})
   end
 },
 
---{
---  "ms-jpq/coq_nvim",
---  -- optional for icon support
---  dependencies = { "ms-jpq/coq.artifacts","ms-jpq/coq.thirdparty" },
---  config = function()
---    require "plugins.coq"
---  end
---},
---
+{
+  "ms-jpq/coq_nvim",
+  -- optional for icon support
+  dependencies = { "ms-jpq/coq.artifacts","ms-jpq/coq.thirdparty" },
+  config = function()
+    require "plugins.coq"
+  end
+},
 
-
-
----- Using packer
---use({
---    "LeonHeidelbach/trailblazer.nvim",
---    config = function()
---        require("trailblazer").setup({
---            -- your custom config goes here
---        })
---    end,
---})
+{
+  "LeonHeidelbach/trailblazer.nvim",
+  config = function()
+      require("trailblazer").setup({
+          -- your custom config goes here
+      })
+  end,
+}
 
 }
 ---- packer example: wait for config for lazy
