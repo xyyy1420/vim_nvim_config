@@ -27,33 +27,6 @@ return {
 },
 -- }}}
 
--- Telescope {{{
-{
-  'nvim-telescope/telescope.nvim',
-  tag = '0.1.1',
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "ahmedkhalf/project.nvim",
-  },
-  config = function()
-    require "plugins.telescope"
-  end
-},
--- }}}
-
--- Telescope fzf-native {{{
-{
-  "telescope.nvim",
-  dependencies={
-    'nvim-telescope/telescope-fzf-native.nvim',
-  build = 'make',
-  config=function()
-    require("telescope").load_extension("fzf")
-  end
-  }
-},
---}}}
-
 -- CMP {{{
 {
   'hrsh7th/nvim-cmp',
@@ -69,9 +42,9 @@ return {
         end,
       },
 
---      config=function ()
---        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
---      end
+      config=function ()
+        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
+      end
     },
     'saadparwaiz1/cmp_luasnip',
 
@@ -81,7 +54,6 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-nvim-lua',
     'ray-x/cmp-treesitter',
---    'f3fora/cmp-spell',
 
     'neovim/nvim-lspconfig',
 
@@ -102,17 +74,17 @@ return {
 },
 -- }}}
 --
----- Trouble {{{
---{
---  "folke/trouble.nvim",
---  dependencies = "nvim-tree/nvim-web-devicons",
---  config = function()
---    require "plugins.trouble"
---  end,
---},
----- }}}
+-- Trouble {{{
+{
+  "folke/trouble.nvim",
+  dependencies = "nvim-tree/nvim-web-devicons",
+  config = function()
+    require "plugins.trouble"
+  end,
+},
+-- }}}
 
--- TreeSitter config copy from lazyvim {{{
+---- TreeSitter config copy from lazyvim {{{
 --{
 --  "nvim-treesitter/nvim-treesitter",
 --  build = ":TSUpdate",
@@ -188,8 +160,7 @@ return {
 --    end
 --  end,
 --},
----- }}}
-
+-- }}}
 -- Nvim-various-textobjs {{{
 {
   "chrisgrieser/nvim-various-textobjs",
@@ -269,15 +240,15 @@ return {
 
 --}}}
 
--- Guess-indent {{{
-{
-  "nmac427/guess-indent.nvim" ,
-  opts=function ()
-    require "plugins.guess-indent"
-  end
-},
-
---}}}
+---- Guess-indent {{{
+--{
+--  "nmac427/guess-indent.nvim" ,
+--  opts=function ()
+--    require "plugins.guess-indent"
+--  end
+--},
+--
+----}}}
 
 -- Flash {{{
 {
@@ -396,6 +367,16 @@ return {
 --  end
 --},
 --
+
+{
+  "t-troebst/perfanno.nvim",
+  -- optional for icon support
+  config = function()
+    -- calling `setup` is optional for customization
+    require("perfanno").setup({})
+  end
+},
+
 
 
 
