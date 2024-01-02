@@ -268,23 +268,6 @@ return {
 },
 --}}}
 
---Lspsaga {{{
---{
---  'nvimdev/lspsaga.nvim',
---  config = function()
---    require('lspsaga').setup({
---      symbol_in_winbar={
---        enable=false,
---      }
---    })
---  end,
---  dependencies = {
---    'nvim-treesitter/nvim-treesitter', -- optional
---    'nvim-tree/nvim-web-devicons'     -- optional
---    }
---},
-----}}}
-
 -- Centerpad {{{
 {
   "smithbm2316/centerpad.nvim" ,
@@ -313,15 +296,6 @@ return {
 --    }
 --},
 ----}}}
---
----- activate {{{
---{
---  "samjwill/nvim-unception",
---  init = function ()
---    vim.g.unception_open_buffer_in_new_tab=true
---  end
---}
-----}}}
 
 {
   "willothy/flatten.nvim",
@@ -344,8 +318,9 @@ return {
 {
   "stevearc/conform.nvim",
   opts={},
-  lazy=true, --set true for now, when i config it ok, i will enable it
-
+  config = function ()
+    require "plugins.conform"
+  end,
 },
 
 {
@@ -377,22 +352,23 @@ return {
   end
 },
 
+{
+  "LunarVim/bigfile.nvim",
+  -- optional for icon support
+  config = function()
+    -- calling `setup` is optional for customization
+    require("bigfile").setup({})
+  end
+},
 
+{
+  "LeonHeidelbach/trailblazer.nvim",
+  config = function()
+      require("trailblazer").setup({
+          -- your custom config goes here
+      })
+  end,
+}
 
-
----- Using packer
---use({
---    "LeonHeidelbach/trailblazer.nvim",
---    config = function()
---        require("trailblazer").setup({
---            -- your custom config goes here
---        })
---    end,
---})
 
 }
----- packer example: wait for config for lazy
---use {
---  "LunarVim/bigfile.nvim",
---}
-
