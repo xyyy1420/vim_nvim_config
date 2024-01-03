@@ -42,14 +42,12 @@ return {
         end,
       },
 
-      config=function ()
-        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
-      end
+--      config=function ()
+--        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
+--      end
     },
     'saadparwaiz1/cmp_luasnip',
-
     'hrsh7th/cmp-nvim-lsp',
-
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-nvim-lua',
@@ -57,7 +55,6 @@ return {
 
     'neovim/nvim-lspconfig',
 
-    'lukas-reineke/cmp-under-comparator'
   },
   opts = function()
     require "plugins.cmp"
