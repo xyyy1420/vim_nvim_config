@@ -5,7 +5,6 @@
 -- Bootsraping plugin manager
 vim.loader.enable()
 require "lazy-bootstrap"
-
 -- Settings
 require "core.settings"
 require "core.keybindings"
@@ -14,10 +13,34 @@ require "core.keybindings"
 -- Plugin management {{{
 local lazy = require("lazy")
 local opt={
-  install={missing=true,}
+--  spec={
+--    {import="core.plugins"}
+--  },
+  defaults={
+    lazy=false,
+    version=false,
+  },
+  install={missing=true,colorscheme={"base16-colorscheme"}},
+  checker={enabled=true},
+  performance={
+    rtp={
+      disabled_plugin={
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      }
+    }
+  },
+  profiling={
+    loader=false,
+    require=false,
+  }
 }
-
---require("plugins.coq")
 
 lazy.setup("core.plugins",opt)
 -- }}}
