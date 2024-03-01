@@ -4,399 +4,394 @@
   Info: Use <zo> and <zc> to open and close foldings
   See: https://github.com/folke/lazy.nvim
 ]]
-require "helpers/globals"
+require("helpers/globals")
 
 return {
--- Startuptime{{{
-{
-  'tweekmonster/startuptime.vim',
-},
---}}}
+	-- Startuptime{{{
+	{
+		"tweekmonster/startuptime.vim",
+	},
+	--}}}
 
--- Mason {{{
-{
-  "williamboman/mason.nvim",
-  build = ":MasonUpdate",
-  dependencies = {
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
-  },
-  config = function()
-    require "plugins.mason"
-  end
-},
--- }}}
+	-- Mason {{{
+	{
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
+		dependencies = {
+			"williamboman/mason-lspconfig.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		config = function()
+			require("plugins.mason")
+		end,
+	},
+	-- }}}
 
--- Telescope {{{
-{
-  'nvim-telescope/telescope.nvim',
-  tag = '0.1.1',
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "ahmedkhalf/project.nvim",
-  },
-  config = function()
-    require "plugins.telescope"
-  end
-},
--- }}}
+	-- CMP {{{
+	{
+		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		dependencies = {
+			{
+				"L3MON4D3/LuaSnip",
+				delete_check_events = "TextChanged",
+				dependencies = {
+					"rafamadriz/friendly-snippets",
+					config = function()
+						require("luasnip.loaders.from_vscode").lazy_load()
+					end,
+				},
 
--- Telescope fzf-native {{{
-{
-  "telescope.nvim",
-  dependencies={
-    'nvim-telescope/telescope-fzf-native.nvim',
-  build = 'make',
-  config=function()
-    require("telescope").load_extension("fzf")
-  end
-  }
-},
---}}}
+				--      config=function ()
+				--        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
+				--      end
+			},
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"hrsh7th/cmp-nvim-lua",
+			--			"ray-x/cmp-treesitter",
 
--- CMP {{{
-{
-  'hrsh7th/nvim-cmp',
-  event = "InsertEnter",
-  dependencies = {
-    {
-      'L3MON4D3/LuaSnip',
-      delete_check_events="TextChanged",
-      dependencies = {
-        'rafamadriz/friendly-snippets',
-        config = function ()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-      },
+			"neovim/nvim-lspconfig",
+		},
+		opts = function()
+			require("plugins.cmp")
+		end,
+	},
+	-- }}}
 
---      config=function ()
---        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
---      end
-    },
-    'saadparwaiz1/cmp_luasnip',
+	-- Git Signs{{{
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("plugins.gitsigns")
+		end,
+	},
+	-- }}}
+	--
+	-- Trouble {{{
+	{
+		"folke/trouble.nvim",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("plugins.trouble")
+		end,
+	},
+	-- }}}
 
-    'hrsh7th/cmp-nvim-lsp',
+	---- TreeSitter config copy from lazyvim {{{
+	--{
+	--  "nvim-treesitter/nvim-treesitter",
+	--  build = ":TSUpdate",
+	--  event = { "BufReadPost", "BufNewFile" },
+	--  dependencies = {
+	--    {
+	--      "nvim-treesitter/nvim-treesitter-textobjects",
+	--      init = function ()
+	--        require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
+	--        load_textobjects = true
+	--      end,
+	--    }
+	--  },
+	--  opts = {
+	--    highlight = {
+	--      enable = true,
+	--        additional_vim_regex_highlighting = false,
+	--        use_languagetree=false,
+	--        disable = function(_,bufnr)
+	--          local buf_name = vim.api.nvim_buf_get_name(bufnr)
+	--          local file_size=vim.api.nvim_call_function("getfsize",{buf_name})
+	--          return file_size > 256*1024
+	--        end,
+	--    },
+	--    indent = { enable = true },
+	--    ensure_installed = {
+	--      "bash",
+	--      "c",
+	--      "json",
+	--      "lua",
+	--      "luadoc",
+	--      "luap",
+	--      "markdown",
+	--      "markdown_inline",
+	--      "python",
+	--      "query",
+	--      "regex",
+	--      "vim",
+	--      "vimdoc",
+	--      "yaml",
+	--    },
+	--    incremental_selection = {
+	--      enable = false,
+	--    },
+	--  },
+	--  config = function(_, opts)
+	--    if type(opts.ensure_installed) == "table" then
+	--      ---@type table<string, boolean>
+	--      local added = {}
+	--      opts.ensure_installed = vim.tbl_filter(function(lang)
+	--        if added[lang] then
+	--          return false
+	--        end
+	--        added[lang] = true
+	--        return true
+	--      end, opts.ensure_installed)
+	--    end
+	--    require("nvim-treesitter.configs").setup(opts)
+	--
+	--    if load_textobjects then
+	--      -- PERF: no need to load the plugin, if we only need its queries for mini.ai
+	--      if opts.textobjects then
+	--        for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
+	--          if opts.textobjects[mod] and opts.textobjects[mod].enable then
+	--            local Loader = require("lazy.core.loader")
+	--            Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
+	--            local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
+	--            require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
+	--            break
+	--          end
+	--        end
+	--      end
+	--    end
+	--  end,
+	--},
 
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
-    'hrsh7th/cmp-nvim-lua',
-    'ray-x/cmp-treesitter',
-    'f3fora/cmp-spell',
+	-- }}}
+	-- Nvim-various-textobjs {{{
+	{
+		"chrisgrieser/nvim-various-textobjs",
+		opts = { useDefaultKeymaps = true },
+	},
+	-- }}}
 
-    'neovim/nvim-lspconfig',
+	-- Theme: nvim-base16 {{{
+	{
+		"RRethy/nvim-base16",
+		lazy = false,
+		commit = "3c6a56016cea7b892f1d5b9b5b4388c0f71985be",
+		config = function()
+			require("plugins.colorscheme.nvim-base16")
+		end,
+	},
+	-- }}}
 
-    'lukas-reineke/cmp-under-comparator'
-  },
-  opts = function()
-    require "plugins.cmp"
-  end
-},
--- }}}
+	---- Hardtime{{{
+	----  {
+	----  "m4xshen/hardtime.nvim",
+	----  opts = {}
+	----  },
+	---- }}}
 
--- Cmp choise{{{
-{
-  'doxnit/cmp-luasnip-choice',
-  config = function()
-    require('cmp_luasnip_choice').setup({
-      auto_open=true,
-    });
-  end
-},
--- }}}
+	-- toggleterm{{{
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		config = true,
+		opts = function()
+			require("plugins.toggleterm")
+		end,
+	},
+	-- }}}
 
--- Git Signs{{{
-{
-  'lewis6991/gitsigns.nvim',
-  config = function()
-    require "plugins.gitsigns"
-  end
-},
--- }}}
+	-- Register {{{
+	{
+		"tversteeg/registers.nvim",
+		name = "registers",
+		keys = {
+			{ '"',     mode = { "n", "v" } },
+			{ "<C_R>", mode = { "i" } },
+		},
+		cmd = "Registers",
+		config = function()
+			require("plugins.register")
+		end,
+	},
+	-- }}}
 
--- Trouble {{{
-{
-  "folke/trouble.nvim",
-  dependencies = "nvim-tree/nvim-web-devicons",
-  config = function()
-    require "plugins.trouble"
-  end,
-},
--- }}}
+	-- oil {{{
 
--- TreeSitter config copy from lazyvim {{{
-{
-  "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
-  event = { "BufReadPost", "BufNewFile" },
-  dependencies = {
-    {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      init = function ()
-        require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-        load_textobjects = true
-      end,
-    }
-  },
-  opts = {
-    highlight = {
-      enable = true,
-        additional_vim_regex_highlighting = false,
-    },
-    indent = { enable = true },
-    ensure_installed = {
-      "bash",
-      "c",
-      "json",
-      "lua",
-      "luadoc",
-      "luap",
-      "markdown",
-      "markdown_inline",
-      "python",
-      "query",
-      "regex",
-      "vim",
-      "vimdoc",
-      "yaml",
-    },
-    incremental_selection = {
-      enable = false,
-    },
-  },
-  config = function(_, opts)
-    if type(opts.ensure_installed) == "table" then
-      ---@type table<string, boolean>
-      local added = {}
-      opts.ensure_installed = vim.tbl_filter(function(lang)
-        if added[lang] then
-          return false
-        end
-        added[lang] = true
-        return true
-      end, opts.ensure_installed)
-    end
-    require("nvim-treesitter.configs").setup(opts)
+	{
+		"stevearc/oil.nvim",
+		opts = function()
+			require("plugins.oil")
+		end,
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
+	-- }}}
 
-    if load_textobjects then
-      -- PERF: no need to load the plugin, if we only need its queries for mini.ai
-      if opts.textobjects then
-        for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-          if opts.textobjects[mod] and opts.textobjects[mod].enable then
-            local Loader = require("lazy.core.loader")
-            Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
-            local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
-            require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
-            break
-          end
-        end
-      end
-    end
-  end,
-},
--- }}}
+	-- Neoformat {{{
+	{
+		"sbdchd/neoformat",
+	},
+	-- }}}
 
--- Nvim-various-textobjs {{{
-{
-  "chrisgrieser/nvim-various-textobjs",
-  opts = { useDefaultKeymaps = true },
-},
--- }}}
+	-- Tmux {{{
+	-- set keybinding in tmux and nvim
+	{
+		"aserowy/tmux.nvim",
+		configs = function()
+			require("plugins.tmux")
+		end,
+	},
 
--- Theme: Sonokai {{{
-{
-  "sainnhe/sonokai",
-  lazy = false,
-  config = function()
-    require "plugins.colorscheme.sonokai"
-  end
-},
--- }}}
+	--}}}
 
--- Theme: lush {{{
-{
-  "rktjmp/lush.nvim",
-  priority=1000,
-  config = function()
-    require "plugins.colorscheme.lush"
-  end
-},
--- }}}
+	-- Guess-indent {{{
+	{
+		"nmac427/guess-indent.nvim",
+		opts = function()
+			require("plugins.guess-indent")
+		end,
+	},
+	--}}}
 
--- Theme: onedark {{{
-{ 
-  'navarasu/onedark.nvim',
-  config = function()
-    require "plugins.colorscheme.onedark"
-  end
-},
--- }}}
+	-- Flash {{{
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+			{
+				"r",
+				mode = "o",
+				function()
+					require("flash").remote()
+				end,
+				desc = "Remote Flash",
+			},
+			{
+				"R",
+				mode = { "o", "x" },
+				function()
+					require("flash").treesitter_search()
+				end,
+				desc = "Treesitter Search",
+			},
+			{
+				"<c-s>",
+				mode = { "c" },
+				function()
+					require("flash").toggle()
+				end,
+				desc = "Toggle Flash Search",
+			},
+		},
+		config = function()
+			require("plugins.flash_config")
+		end,
+	},
+	--}}}
 
--- Hardtime{{{
---  {
---  "m4xshen/hardtime.nvim",
---  opts = {}
---  },
--- }}}
+	-- Centerpad {{{
+	{
+		"smithbm2316/centerpad.nvim",
+	},
 
--- toggleterm{{{
-{
-  'akinsho/toggleterm.nvim', 
-  version = "*", 
-  config = true,
-  opts=function ()
-    require 'plugins.toggleterm'
-  end
-},
--- }}}
+	--}}}
 
--- harpoon {{{
-{
-  "ThePrimeagen/harpoon",
-  dependencies = {
-    {
-      "nvim-lua/plenary.nvim",
-      lazy = true,
-    },
+	-- surround {{{
+	{
+		"tpope/vim-surround",
+	},
+	--}}}
 
-  },
-  opts=function ()
-    require('plugins.harpoon')
-  end
-},
--- }}}
+	{
+		"willothy/flatten.nvim",
+		config = true,
+		-- or pass configuration with
+		-- opts = {  }
+		-- Ensure that it runs first to minimize delay when opening file from terminal
+		lazy = false,
+		priority = 1001,
+	},
 
--- Register {{{
-{
-  "tversteeg/registers.nvim",
-  name = "registers",
-  keys = {
-    {"\"",mode={"n","v"}},
-    {"<C_R>",mode={"i"}}
-  },
-  cmd = "Registers",
-  config = function()
-    require "plugins.register"
-  end,
-},
--- }}}
+	-- {
+	-- 	"vidocqh/auto-indent.nvim",
+	-- 	config = function()
+	-- 		require("plugins.auto-indent")
+	-- 	end,
+	-- },
 
--- oil {{{
+	{
+		"ibhagwan/fzf-lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			-- calling `setup` is optional for customization
+			require("fzf-lua").setup({})
+		end,
+	},
 
-{
-  'stevearc/oil.nvim',
-  opts = function ()
-    require "plugins.oil"
-  end,
-  -- Optional dependencies
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-},
--- }}}
+	----	{
+	----		"ms-jpq/coq_nvim",
+	----		branch = "coq",
+	----		event = "InsertEnter",
+	----		opt = true,
+	----		run = "COQdeps",
+	----		config = function() end,
+	----		-- optional for icon support
+	----		dependencies = {
+	----			{ "ms-jpq/coq.artifacts", branch = "artifacts" },
+	----			{ "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
+	----		},
+	----    disable=false,
+	----	},
 
--- symbols-outline {{{
-{
-  "simrat39/symbols-outline.nvim",
-  opts = function ()
-    require "plugins.symbols-outline"
-  end
-},
--- }}}
+	{
+		"t-troebst/perfanno.nvim",
+		-- optional for icon support
+		config = function()
+			-- calling `setup` is optional for customization
+			require("perfanno").setup({})
+		end,
+	},
 
--- Distant {{{
-{
-  'chipsenkbeil/distant.nvim',
-  branch = 'v0.3',
-  config = function()
-    require('distant'):setup()
-  end
-},
--- }}}
+	{
+		"nvimtools/none-ls.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("plugins.none-ls")
+		end,
+	},
 
--- Neoformat {{{
-{
-  'sbdchd/neoformat',
-},
--- }}}
+	{
+		"tamago324/nlsp-settings.nvim",
+		config = function()
+			require("plugins.nlsp-settings")
+		end,
+	},
 
--- Tmux {{{
--- set keybinding in tmux and nvim
-{
-  'aserowy/tmux.nvim',
-  configs=function ()
-    require 'plugins.tmux'
-  end
-},
+	{
+		"LunarVim/bigfile.nvim",
+		-- optional for icon support
+		config = function()
+			-- calling `setup` is optional for customization
+			require("bigfile").setup({})
+		end,
+	},
 
---}}}
-
--- Guess-indent {{{
-{
-  "nmac427/guess-indent.nvim" ,
-  opts=function ()
-    require "plugins.guess-indent"
-  end
-},
-
---}}}
-
----- Leap {{{
---{
---  "ggandor/leap.nvim" ,
---  dependencies = {
---    "tpope/vim-repeat",
---  },
---  opts=function ()
---    require "plugins.leap"
---  end
---},
---
-----}}}
-
--- Flash {{
-{
-  "folke/flash.nvim",
-  event = "VeryLazy",
- -- stylua: ignore
-  keys = {
-    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-  },
-  config = function ()
-    require "plugins.flash"
-    require("flash").toggle()
-
-  end,
- 
-},
---}}
-
----- Lspsaga {{{
---{
---  'nvimdev/lspsaga.nvim',
---  config = function()
---    require('lspsaga').setup({
---      symbol_in_winbar={
---        enable=false,
---      }
---    })
---  end,
---  dependencies = {
---    'nvim-treesitter/nvim-treesitter', -- optional
---    'nvim-tree/nvim-web-devicons'     -- optional
---    }
---},
-----}}}
-
--- Centerpad {{{
-{
-  "smithbm2316/centerpad.nvim" ,
-},
-
---}}}
-
-
+	--	{
+	--		"LeonHeidelbach/trailblazer.nvim",
+	--		config = function()
+	--			require("trailblazer").setup({
+	--				-- your custom config goes here
+	--			})
+	--		end,
+	--	},
 }
-
--- vim:tabstop=2 shiftwidth=2 expandtab syntax=lua foldmethod=marker foldlevelstart=0 foldlevel=0
