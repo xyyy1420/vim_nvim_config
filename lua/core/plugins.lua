@@ -21,45 +21,45 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"neovim/nvim-lspconfig",
 		},
-		config = function()
-			require("plugins.mason")
-		end,
+--		config = function()
+--			require("plugins.mason")
+--		end,
 	},
 	-- }}}
 
-	-- CMP {{{
-	{
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-		dependencies = {
-			{
-				"L3MON4D3/LuaSnip",
-				delete_check_events = "TextChanged",
-				dependencies = {
-					"rafamadriz/friendly-snippets",
-					config = function()
-						require("luasnip.loaders.from_vscode").lazy_load()
-					end,
-				},
-
-				--      config=function ()
-				--        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
-				--      end
-			},
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"hrsh7th/cmp-nvim-lua",
-			--			"ray-x/cmp-treesitter",
-
-			"neovim/nvim-lspconfig",
-		},
-		opts = function()
-			require("plugins.cmp")
-		end,
-	},
-	-- }}}
+--	-- CMP {{{
+--	{
+--		"hrsh7th/nvim-cmp",
+--		event = "InsertEnter",
+--		dependencies = {
+--			{
+--				"L3MON4D3/LuaSnip",
+--				delete_check_events = "TextChanged",
+--				dependencies = {
+--					"rafamadriz/friendly-snippets",
+--					config = function()
+--						require("luasnip.loaders.from_vscode").lazy_load()
+--					end,
+--				},
+--
+--				--      config=function ()
+--				--        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
+--				--      end
+--			},
+--			"saadparwaiz1/cmp_luasnip",
+--			"hrsh7th/cmp-nvim-lsp",
+--			"hrsh7th/cmp-path",
+--			"hrsh7th/cmp-nvim-lsp-signature-help",
+--			"hrsh7th/cmp-nvim-lua",
+--			--			"ray-x/cmp-treesitter",
+--
+--			"neovim/nvim-lspconfig",
+--		},
+--		opts = function()
+--			require("plugins.cmp")
+--		end,
+--	},
+--	-- }}}
 
 	-- Git Signs{{{
 	{
@@ -69,7 +69,7 @@ return {
 		end,
 	},
 	-- }}}
-	--
+
 	-- Trouble {{{
 	{
 		"folke/trouble.nvim",
@@ -322,13 +322,6 @@ return {
 		priority = 1001,
 	},
 
-	-- {
-	-- 	"vidocqh/auto-indent.nvim",
-	-- 	config = function()
-	-- 		require("plugins.auto-indent")
-	-- 	end,
-	-- },
-
 	{
 		"ibhagwan/fzf-lua",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -337,21 +330,6 @@ return {
 			require("fzf-lua").setup({})
 		end,
 	},
-
-	----	{
-	----		"ms-jpq/coq_nvim",
-	----		branch = "coq",
-	----		event = "InsertEnter",
-	----		opt = true,
-	----		run = "COQdeps",
-	----		config = function() end,
-	----		-- optional for icon support
-	----		dependencies = {
-	----			{ "ms-jpq/coq.artifacts", branch = "artifacts" },
-	----			{ "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
-	----		},
-	----    disable=false,
-	----	},
 
 	{
 		"t-troebst/perfanno.nvim",
@@ -384,6 +362,31 @@ return {
 			-- calling `setup` is optional for customization
 			require("bigfile").setup({})
 		end,
+	},
+
+	{
+		"VonHeikemen/lsp-zero.nvim",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"hrsh7th/nvim-cmp",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lua",
+			"rafamadriz/friendly-snippets",
+			"L3MON4D3/LuaSnip"
+		},
+		branch = 'v3.x',
+		config = function()
+			require("plugins.lsp-zero")
+		end
+	},
+
+	{
+		'mrcjkb/haskell-tools.nvim',
+		version = '^3',
+		ft = {'haskell','lhaskell','cabal','cabalproject'},
 	},
 
 	--	{
