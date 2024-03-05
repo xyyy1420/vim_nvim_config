@@ -21,45 +21,45 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"neovim/nvim-lspconfig",
 		},
-		config = function()
-			require("plugins.mason")
-		end,
+--		config = function()
+--			require("plugins.mason")
+--		end,
 	},
 	-- }}}
 
-	-- CMP {{{
-	{
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-		dependencies = {
-			{
-				"L3MON4D3/LuaSnip",
-				delete_check_events = "TextChanged",
-				dependencies = {
-					"rafamadriz/friendly-snippets",
-					config = function()
-						require("luasnip.loaders.from_vscode").lazy_load()
-					end,
-				},
-
-				--      config=function ()
-				--        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
-				--      end
-			},
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"hrsh7th/cmp-nvim-lua",
-			"ray-x/cmp-treesitter",
-
-			"neovim/nvim-lspconfig",
-		},
-		opts = function()
-			require("plugins.cmp")
-		end,
-	},
-	-- }}}
+--	-- CMP {{{
+--	{
+--		"hrsh7th/nvim-cmp",
+--		event = "InsertEnter",
+--		dependencies = {
+--			{
+--				"L3MON4D3/LuaSnip",
+--				delete_check_events = "TextChanged",
+--				dependencies = {
+--					"rafamadriz/friendly-snippets",
+--					config = function()
+--						require("luasnip.loaders.from_vscode").lazy_load()
+--					end,
+--				},
+--
+--				--      config=function ()
+--				--        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
+--				--      end
+--			},
+--			"saadparwaiz1/cmp_luasnip",
+--			"hrsh7th/cmp-nvim-lsp",
+--			"hrsh7th/cmp-path",
+--			"hrsh7th/cmp-nvim-lsp-signature-help",
+--			"hrsh7th/cmp-nvim-lua",
+--			--			"ray-x/cmp-treesitter",
+--
+--			"neovim/nvim-lspconfig",
+--		},
+--		opts = function()
+--			require("plugins.cmp")
+--		end,
+--	},
+--	-- }}}
 
 	-- Git Signs{{{
 	{
@@ -169,6 +169,7 @@ return {
 	{
 		"RRethy/nvim-base16",
 		lazy = false,
+		commit = "3c6a56016cea7b892f1d5b9b5b4388c0f71985be",
 		config = function()
 			require("plugins.colorscheme.nvim-base16")
 		end,
@@ -198,7 +199,7 @@ return {
 		"tversteeg/registers.nvim",
 		name = "registers",
 		keys = {
-			{ '"', mode = { "n", "v" } },
+			{ '"',     mode = { "n", "v" } },
 			{ "<C_R>", mode = { "i" } },
 		},
 		cmd = "Registers",
@@ -237,15 +238,14 @@ return {
 
 	--}}}
 
-	---- Guess-indent {{{
-	--{
-	--  "nmac427/guess-indent.nvim" ,
-	--  opts=function ()
-	--    require "plugins.guess-indent"
-	--  end
-	--},
-	--
-	----}}}
+	-- Guess-indent {{{
+	{
+		"nmac427/guess-indent.nvim",
+		opts = function()
+			require("plugins.guess-indent")
+		end,
+	},
+	--}}}
 
 	-- Flash {{{
 	{
@@ -323,23 +323,7 @@ return {
 	},
 
 	{
-		"vidocqh/auto-indent.nvim",
-		config = function()
-			require("plugins.auto-indent")
-		end,
-	},
-
-	{
-		"stevearc/conform.nvim",
-		opts = {},
-		config = function()
-			require("plugins.conform")
-		end,
-	},
-
-	{
 		"ibhagwan/fzf-lua",
-		-- optional for icon support
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			-- calling `setup` is optional for customization
@@ -347,22 +331,27 @@ return {
 		end,
 	},
 
-	--{
-	--  "ms-jpq/coq_nvim",
-	--  -- optional for icon support
-	--  dependencies = { "ms-jpq/coq.artifacts","ms-jpq/coq.thirdparty" },
-	--  config = function()
-	--    require "plugins.coq"
-	--  end
-	--},
-	--
-
 	{
 		"t-troebst/perfanno.nvim",
 		-- optional for icon support
 		config = function()
 			-- calling `setup` is optional for customization
 			require("perfanno").setup({})
+		end,
+	},
+
+	{
+		"nvimtools/none-ls.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("plugins.none-ls")
+		end,
+	},
+
+	{
+		"tamago324/nlsp-settings.nvim",
+		config = function()
+			require("plugins.nlsp-settings")
 		end,
 	},
 
@@ -376,11 +365,36 @@ return {
 	},
 
 	{
-		"LeonHeidelbach/trailblazer.nvim",
+		"VonHeikemen/lsp-zero.nvim",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"hrsh7th/nvim-cmp",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh8th/cmp-path",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lua",
+			"rafamadriz/friendly-snippets",
+			"L3MON4D3/LuaSnip"
+		},
+		branch = 'v3.x',
 		config = function()
-			require("trailblazer").setup({
-				-- your custom config goes here
-			})
-		end,
+			require("plugins.lsp-zero")
+		end
 	},
+
+-- 	{
+-- 		'mrcjkb/haskell-tools.nvim',
+-- 		version = '^3',
+-- 		ft = {'haskell','lhaskell','cabal','cabalproject'},
+-- 	},
+
+	--	{
+	--		"LeonHeidelbach/trailblazer.nvim",
+	--		config = function()
+	--			require("trailblazer").setup({
+	--				-- your custom config goes here
+	--			})
+	--		end,
+	--	},
 }

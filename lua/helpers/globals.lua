@@ -1,9 +1,9 @@
-cmd = vim.cmd; -- Command function
-api = vim.api; -- Neovim API
-lsp = vim.lsp; -- LSP API
-fn = vim.fn;   -- Vim function
-g = vim.g;     -- Vim globals
-opt = vim.opt; -- Vim optionals
-o=vim.o       -- global option
+cmd = vim.cmd -- Command function
+api = vim.api -- Neovim API
+lsp = vim.lsp -- LSP API
+fn = vim.fn -- Vim function
+g = vim.g -- Vim globals
+opt = vim.opt -- Vim optionals
+o = vim.o -- global option
 --theme= 'onedark'
-theme = 'base16-monokai'
+theme = "base16-monokai"

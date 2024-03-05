@@ -112,7 +112,7 @@ cmp.setup {
         {name = 'nvim_lsp'}, -- LSP
         {name = 'luasnip'}, -- Luasnip
         {name = 'nvim_lsp_signature_help'}, -- LSP for parameters in functions
-        {name = 'treesitter'}, -- Treesitter
+--        {name = 'treesitter'}, -- Treesitter
         {name = 'nvim_lua'}, -- Lua Neovim API
         {name = 'buffer',keyword_length=10}, -- Buffers
         {name = 'path'}, -- Paths

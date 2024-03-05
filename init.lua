@@ -10,6 +10,7 @@ require "core.settings"
 require "core.keybindings"
 
 
+--require("plugins.coq")
 -- Plugin management {{{
 local lazy = require("lazy")
 local opt={
