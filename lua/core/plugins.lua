@@ -21,45 +21,8 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"neovim/nvim-lspconfig",
 		},
---		config = function()
---			require("plugins.mason")
---		end,
 	},
 	-- }}}
-
---	-- CMP {{{
---	{
---		"hrsh7th/nvim-cmp",
---		event = "InsertEnter",
---		dependencies = {
---			{
---				"L3MON4D3/LuaSnip",
---				delete_check_events = "TextChanged",
---				dependencies = {
---					"rafamadriz/friendly-snippets",
---					config = function()
---						require("luasnip.loaders.from_vscode").lazy_load()
---					end,
---				},
---
---				--      config=function ()
---				--        require("luasnip/loaders/from_vscode").load({paths={"~/.local/share/nvim/lazy/friendly-snippets/snippets"}})
---				--      end
---			},
---			"saadparwaiz1/cmp_luasnip",
---			"hrsh7th/cmp-nvim-lsp",
---			"hrsh7th/cmp-path",
---			"hrsh7th/cmp-nvim-lsp-signature-help",
---			"hrsh7th/cmp-nvim-lua",
---			--			"ray-x/cmp-treesitter",
---
---			"neovim/nvim-lspconfig",
---		},
---		opts = function()
---			require("plugins.cmp")
---		end,
---	},
---	-- }}}
 
 	-- Git Signs{{{
 	{
@@ -176,13 +139,6 @@ return {
 	},
 	-- }}}
 
-	---- Hardtime{{{
-	----  {
-	----  "m4xshen/hardtime.nvim",
-	----  opts = {}
-	----  },
-	---- }}}
-
 	-- toggleterm{{{
 	{
 		"akinsho/toggleterm.nvim",
@@ -243,58 +199,6 @@ return {
 		"nmac427/guess-indent.nvim",
 		opts = function()
 			require("plugins.guess-indent")
-		end,
-	},
-	--}}}
-
-	-- Flash {{{
-	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		keys = {
-			{
-				"s",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").jump()
-				end,
-				desc = "Flash",
-			},
-			{
-				"S",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").treesitter()
-				end,
-				desc = "Flash Treesitter",
-			},
-			{
-				"r",
-				mode = "o",
-				function()
-					require("flash").remote()
-				end,
-				desc = "Remote Flash",
-			},
-			{
-				"R",
-				mode = { "o", "x" },
-				function()
-					require("flash").treesitter_search()
-				end,
-				desc = "Treesitter Search",
-			},
-			{
-				"<c-s>",
-				mode = { "c" },
-				function()
-					require("flash").toggle()
-				end,
-				desc = "Toggle Flash Search",
-			},
-		},
-		config = function()
-			require("plugins.flash_config")
 		end,
 	},
 	--}}}
@@ -371,7 +275,7 @@ return {
 			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
-			"hrsh8th/cmp-path",
+			"hrsh7th/cmp-path",
 			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lua",
 			"rafamadriz/friendly-snippets",
@@ -380,6 +284,17 @@ return {
 		branch = 'v3.x',
 		config = function()
 			require("plugins.lsp-zero")
+		end
+	},
+
+
+	{
+		"ggandor/leap.nvim",
+		dependencies = {
+			"tpope/vim-repeat"
+		},
+		config = function ()
+			require("plugins.leap")
 		end
 	},
 
